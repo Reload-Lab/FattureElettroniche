@@ -1,0 +1,22 @@
+{
+  "name": "Reload-Lab/FattureElettroniche",
+  "description": "Classe PHP per scrivere, leggere e validare una fattura elettronica in formato XML",
+  "type": "library",
+  "autoload": {
+    "psr-4": {"F5\\FattureElettroniche\\": "src/FattureElettroniche/"}
+  },
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "homepage": "https://www.reloadlab.it",
+  "authors": [
+    {
+	  "name": "Domenico Gigante",
+	  "email": "domenico.gigante@reloadlab.it"
+	}
+  ],
+  "require": {}
+  "keywords": ["fatture elettroniche","agenzia delle entrate","fisco","fatturazione"]
+}

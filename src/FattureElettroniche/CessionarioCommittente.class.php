@@ -4,7 +4,7 @@
  * 
  * Copyright © 2022
  * Reload - Laboratorio Multimediale
- * (http://www.reloadlab.it - info@reloadlab.it)
+ * (https://www.reloadlab.it - info@reloadlab.it)
  * 
  * authors: Domenico Gigante (domenico.gigante@reloadlab.it)
  ***/

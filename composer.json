@@ -7,7 +7,7 @@
 	  "F5\\FattureElettroniche\\": "src/FattureElettroniche/"
 	},
     "files": [
-      "src/FattureElettroniche/FattureElettroniche.class.php",
+      "src/FattureElettroniche/FatturaElettronica.class.php",
       "src/FattureElettroniche/Allegati.class.php",
       "src/FattureElettroniche/AltriDatiGestionali.class.php",
       "src/FattureElettroniche/Anagrafica.class.php",

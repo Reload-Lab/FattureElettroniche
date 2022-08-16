@@ -15,7 +15,7 @@ function f5app_autoload($classname){
 		
 		$classname = str_replace('F5\\', '', $classname);
 		$classpath = str_replace("\\", DIRECTORY_SEPARATOR, $classname);
-		$filename = __DIR__.DIRECTORY_SEPARATOR.$classpath.'.class.php';
+		$filename = __DIR__.DIRECTORY_SEPARATOR.$classpath.'.php';
 		if(file_exists($filename)){
 			
 			require_once($filename);

@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -132,7 +132,7 @@ class DatiGeneraliDocumento extends Tag {
 					
 					if(!isset(Costant::$TD[$value])){
 						
-						$this->err()->setErrors(_('Tipo Documento "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Tipo Documento "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -145,8 +145,7 @@ class DatiGeneraliDocumento extends Tag {
 					if(!preg_match('/^[A-Z]+$/', $value) 
 						|| strlen($value) > 3
 					){
-						
-						$this->err()->setErrors(_('Divisa "'.$value.'": Questo campo deve essere espresso secondo lo standard ISO 4217 alpha-3:2001 (es.: EUR, USD, GBP, CZK………) in '.$classname));
+						$this->err()->setErrors(_('Divisa "'.$value.'": Questo campo deve essere espresso secondo lo standard ISO 4217 alpha-3:2001 (es.: EUR, USD, GBP, CZK………) in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -157,8 +156,7 @@ class DatiGeneraliDocumento extends Tag {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -169,8 +167,7 @@ class DatiGeneraliDocumento extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 20
 					){
-						
-						$this->err()->setErrors(_('Numero "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.$classname));
+						$this->err()->setErrors(_('Numero "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -182,8 +179,7 @@ class DatiGeneraliDocumento extends Tag {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Importo Totale Documento "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Importo Totale Documento "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -191,12 +187,11 @@ class DatiGeneraliDocumento extends Tag {
 				// Arrotondamento
 				if($name == 'Arrotondamento'){
 					
-					if(!preg_match('/^(?=.)(([0-9]+)(\.([0-9]+))?)$/', $value) 
+					if(!preg_match('/^[-+]?(?=.)(([0-9]+)(\.([0-9]+))?)$/', $value) 
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Arrotondamento "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Arrotondamento "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -208,7 +203,7 @@ class DatiGeneraliDocumento extends Tag {
 					
 					if(!isset(Costant::$ART73[$value])){
 						
-						$this->err()->setErrors(_('Art73 "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Art73 "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -242,7 +237,7 @@ class DatiGeneraliDocumento extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Tipo Documento: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Tipo Documento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Divisa
@@ -253,7 +248,7 @@ class DatiGeneraliDocumento extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Divisa: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Divisa: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Data
@@ -264,7 +259,7 @@ class DatiGeneraliDocumento extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Data: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Data: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Numero
@@ -275,7 +270,7 @@ class DatiGeneraliDocumento extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Numero: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Numero: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Dati Ritenuta
@@ -400,11 +395,10 @@ class DatiGeneraliDocumento extends Tag {
 			&& $xmldata->TipoDocumento instanceof SimpleXMLElement
 			&& (string) $xmldata->TipoDocumento != ''
 		){
-			
 			$this->__set('TipoDocumento', (string) $xmldata->TipoDocumento);
 		} else{
 			
-			$this->err()->setErrors(_('Tipo Documento: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Tipo Documento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Divisa
@@ -412,11 +406,10 @@ class DatiGeneraliDocumento extends Tag {
 			&& $xmldata->Divisa instanceof SimpleXMLElement
 			&& (string) $xmldata->Divisa != ''
 		){
-			
 			$this->__set('Divisa', (string) $xmldata->Divisa);
 		} else{
 			
-			$this->err()->setErrors(_('Divisa: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Divisa: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Data
@@ -424,11 +417,10 @@ class DatiGeneraliDocumento extends Tag {
 			&& $xmldata->Data instanceof SimpleXMLElement
 			&& (string) $xmldata->Data != ''
 		){
-			
 			$this->__set('Data', (string) $xmldata->Data);
 		} else{
 			
-			$this->err()->setErrors(_('Data: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Data: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Numero
@@ -436,18 +428,16 @@ class DatiGeneraliDocumento extends Tag {
 			&& $xmldata->Numero instanceof SimpleXMLElement
 			&& (string) $xmldata->Numero != ''
 		){
-			
 			$this->__set('Numero', (string) $xmldata->Numero);
 		} else{
 			
-			$this->err()->setErrors(_('Numero: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Numero: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Dati Ritenuta
 		if(isset($xmldata->DatiRitenuta)
 			&& $xmldata->DatiRitenuta instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiRitenuta->count(); $k++){
 				
 				$this->__DatiRitenuta[$k] = $this->DatiRitenuta[$k]
@@ -459,14 +449,13 @@ class DatiGeneraliDocumento extends Tag {
 		if(isset($xmldata->DatiBollo) 
 			&& $xmldata->DatiBollo instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiBollo->count() == 1){
 				
 				$this->__DatiBollo = $this->DatiBollo
 					->loopXml($xmldata->DatiBollo);
 			} else{
 				
-				$this->err()->setErrors(_('Dati Bollo: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Bollo: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -474,7 +463,6 @@ class DatiGeneraliDocumento extends Tag {
 		if(isset($xmldata->DatiCassaPrevidenziale)
 			&& $xmldata->DatiCassaPrevidenziale instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiCassaPrevidenziale->count(); $k++){
 				
 				$this->__DatiCassaPrevidenziale[$k] = $this->DatiCassaPrevidenziale[$k]
@@ -486,7 +474,6 @@ class DatiGeneraliDocumento extends Tag {
 		if(isset($xmldata->ScontoMaggiorazione)
 			&& $xmldata->ScontoMaggiorazione instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->ScontoMaggiorazione->count(); $k++){
 				
 				$this->__ScontoMaggiorazione[$k] = $this->ScontoMaggiorazione[$k]
@@ -499,7 +486,6 @@ class DatiGeneraliDocumento extends Tag {
 			&& $xmldata->ImportoTotaleDocumento instanceof SimpleXMLElement
 			&& (string) $xmldata->ImportoTotaleDocumento != ''
 		){
-			
 			$this->__set('ImportoTotaleDocumento', (string) $xmldata->ImportoTotaleDocumento);
 		}
 		
@@ -508,7 +494,6 @@ class DatiGeneraliDocumento extends Tag {
 			&& $xmldata->Arrotondamento instanceof SimpleXMLElement
 			&& (string) $xmldata->Arrotondamento != ''
 		){
-			
 			$this->__set('Arrotondamento', (string) $xmldata->Arrotondamento);
 		}
 		
@@ -516,7 +501,6 @@ class DatiGeneraliDocumento extends Tag {
 		if(isset($xmldata->Causale)
 			&& $xmldata->Causale instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->Causale->count() > 1){
 				
 				for($k = 0; $k < $xmldata->Causale->count(); $k++){
@@ -534,7 +518,6 @@ class DatiGeneraliDocumento extends Tag {
 			&& $xmldata->Art73 instanceof SimpleXMLElement
 			&& (string) $xmldata->Art73 != ''
 		){
-			
 			$this->__set('Art73', (string) $xmldata->Art73);
 		}
 		

@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -79,8 +79,7 @@ class Anagrafica extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 80
 					){
-						
-						$this->err()->setErrors(_('Denominazione "'.$value.'": Formato alfanumerico; lunghezza massima di 80 caratteri in '.$classname));
+						$this->err()->setErrors(_('Denominazione "'.$value.'": Formato alfanumerico; lunghezza massima di 80 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -91,8 +90,7 @@ class Anagrafica extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Nome "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Nome "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -103,8 +101,7 @@ class Anagrafica extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Cognome "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Cognome "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -116,8 +113,7 @@ class Anagrafica extends Tag {
 						|| strlen($value) < 2 
 						|| strlen($value) > 10
 					){
-						
-						$this->err()->setErrors(_('Titolo "'.$value.'": Formato alfanumerico; lunghezza che va da 2 a 10 caratteri in '.$classname));
+						$this->err()->setErrors(_('Titolo "'.$value.'": Formato alfanumerico; lunghezza che va da 2 a 10 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -129,8 +125,7 @@ class Anagrafica extends Tag {
 						|| strlen($value) < 13 
 						|| strlen($value) > 17
 					){
-						
-						$this->err()->setErrors(_('Codice EORI "'.$value.'": Formato alfanumerico; lunghezza che va da 13 a 17 caratteri in '.$classname));
+						$this->err()->setErrors(_('Codice EORI "'.$value.'": Formato alfanumerico; lunghezza che va da 13 a 17 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -182,7 +177,7 @@ class Anagrafica extends Tag {
 				$elem->appendChild($child);
 			} else{
 				
-				$this->err()->setErrors(_('Denominazione: Il tipo è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Denominazione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -224,7 +219,6 @@ class Anagrafica extends Tag {
 			&& $xmldata->Cognome instanceof SimpleXMLElement
 			&& (string) $xmldata->Cognome != ''
 		){
-			
 			$this->__set('Nome', (string) $xmldata->Nome);
 		}
 		
@@ -236,7 +230,6 @@ class Anagrafica extends Tag {
 			&& $xmldata->Cognome instanceof SimpleXMLElement
 			&& (string) $xmldata->Cognome != ''
 		){
-			
 			$this->__set('Cognome', (string) $xmldata->Cognome);
 		}
 		
@@ -247,17 +240,15 @@ class Anagrafica extends Tag {
 			|| !($xmldata->Cognome instanceof SimpleXMLElement)
 			|| $xmldata->Cognome == ''
 		){
-		
 			// Denominazione
 			if(isset($xmldata->Denominazione) 
 				&& $xmldata->Denominazione instanceof SimpleXMLElement
 				&& (string) $xmldata->Denominazione != ''
 			){
-				
 				$this->__set('Denominazione', (string) $xmldata->Denominazione);
 			} else{
 				
-				$this->err()->setErrors(_('Denominazione: Il tipo è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Denominazione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -266,7 +257,6 @@ class Anagrafica extends Tag {
 			&& $xmldata->Titolo instanceof SimpleXMLElement
 			&& (string) $xmldata->Titolo != ''
 		){
-			
 			$this->__set('Titolo', (string) $xmldata->Titolo);
 		}
 		
@@ -275,7 +265,6 @@ class Anagrafica extends Tag {
 			&& $xmldata->CodEORI instanceof SimpleXMLElement
 			&& (string) $xmldata->CodEORI != ''
 		){
-			
 			$this->__set('CodEORI', (string) $xmldata->CodEORI);
 		}
 		

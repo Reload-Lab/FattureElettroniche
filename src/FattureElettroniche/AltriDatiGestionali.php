@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -14,10 +14,14 @@ use \ReflectionClass;
 use \ReflectionProperty;
 use \SimpleXMLElement;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class AltriDatiGestionali extends Tag implements ArrayAccess {
+class AltriDatiGestionali extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -78,11 +82,10 @@ class AltriDatiGestionali extends Tag implements ArrayAccess {
 				// Tipo Dato
 				if($name == 'TipoDato'){
 					
-					if(!preg_match('/^[a-zA-Z0-9]+$/', $value) 
+					if(!preg_match('/^[a-zA-Z0-9.]+$/', $value) 
 						|| strlen($value) > 10
 					){
-						
-						$this->err()->setErrors(_('Tipo Dato "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.$classname));
+						$this->err()->setErrors(_('Tipo Dato "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -93,8 +96,7 @@ class AltriDatiGestionali extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Riferimento Testo "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Riferimento Testo "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -106,8 +108,7 @@ class AltriDatiGestionali extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 21
 					){
-						
-						$this->err()->setErrors(_('Riferimento Numero "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.$classname));
+						$this->err()->setErrors(_('Riferimento Numero "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -118,8 +119,7 @@ class AltriDatiGestionali extends Tag implements ArrayAccess {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Riferimento Data "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Riferimento Data "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -159,7 +159,7 @@ class AltriDatiGestionali extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Tipo Dato: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Tipo Dato: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Riferimento Testo
@@ -209,11 +209,10 @@ class AltriDatiGestionali extends Tag implements ArrayAccess {
 			&& $xmldata->TipoDato instanceof SimpleXMLElement
 			&& (string) $xmldata->TipoDato != ''
 		){
-			
 			$this->__set('TipoDato', (string) $xmldata->TipoDato);
 		} else{
 			
-			$this->err()->setErrors(_('Tipo Dato: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Tipo Dato: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Riferimento Testo
@@ -221,7 +220,6 @@ class AltriDatiGestionali extends Tag implements ArrayAccess {
 			&& $xmldata->RiferimentoTesto instanceof SimpleXMLElement
 			&& (string) $xmldata->RiferimentoTesto != ''
 		){
-			
 			$this->__set('RiferimentoTesto', (string) $xmldata->RiferimentoTesto);
 		}
 		
@@ -230,7 +228,6 @@ class AltriDatiGestionali extends Tag implements ArrayAccess {
 			&& $xmldata->RiferimentoNumero instanceof SimpleXMLElement
 			&& (string) $xmldata->RiferimentoNumero != ''
 		){
-			
 			$this->__set('RiferimentoNumero', (string) $xmldata->RiferimentoNumero);
 		}
 		
@@ -239,7 +236,6 @@ class AltriDatiGestionali extends Tag implements ArrayAccess {
 			&& $xmldata->RiferimentoData instanceof SimpleXMLElement
 			&& (string) $xmldata->RiferimentoData != ''
 		){
-			
 			$this->__set('RiferimentoData', (string) $xmldata->RiferimentoData);
 		}
 		

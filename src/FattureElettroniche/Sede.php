@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -87,8 +87,7 @@ class Sede extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Indirizzo "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Indirizzo "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -100,8 +99,7 @@ class Sede extends Tag {
 						&& !is_numeric($value))
 						|| strlen($value) > 8
 					){
-						
-						$this->err()->setErrors(_('Numero Civico "'.$value.'": Formato alfanumerico; lunghezza massima di 8 caratteri in '.$classname));
+						$this->err()->setErrors(_('Numero Civico "'.$value.'": Formato alfanumerico; lunghezza massima di 8 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -112,8 +110,7 @@ class Sede extends Tag {
 					if(!preg_match('/^[0-9]+$/', $value) 
 						|| strlen($value) != 5
 					){
-						
-						$this->err()->setErrors(_('CAP "'.$value.'": Formato numerico; lunghezza di 5 caratteri in '.$classname));
+						$this->err()->setErrors(_('CAP "'.$value.'": Formato numerico; lunghezza di 5 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -124,8 +121,7 @@ class Sede extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Comune "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Comune "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -137,7 +133,7 @@ class Sede extends Tag {
 					
 					if(!isset(Costant::$PI[$value])){
 						
-						$this->err()->setErrors(_('Provincia "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Provincia "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -150,8 +146,7 @@ class Sede extends Tag {
 					if(!preg_match('/^[A-Z]+$/', $value) 
 						|| strlen($value) != 2
 					){
-						
-						$this->err()->setErrors(_('Nazione "'.$value.'": Sigla della nazione espressa secondo lo standard ISO 3166-1 alpha-2 code in '.$classname));
+						$this->err()->setErrors(_('Nazione "'.$value.'": Sigla della nazione espressa secondo lo standard ISO 3166-1 alpha-2 code in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -185,7 +180,7 @@ class Sede extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Indirizzo: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Indirizzo: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Numero Civico
@@ -204,7 +199,7 @@ class Sede extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('CAP: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('CAP: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Comune
@@ -215,7 +210,7 @@ class Sede extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Comune: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Comune: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Provincia
@@ -234,7 +229,7 @@ class Sede extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Nazione: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Nazione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $elem;
@@ -256,11 +251,10 @@ class Sede extends Tag {
 			&& $xmldata->Indirizzo instanceof SimpleXMLElement
 			&& (string) $xmldata->Indirizzo != ''
 		){
-			
 			$this->__set('Indirizzo', (string) $xmldata->Indirizzo);
 		} else{
 			
-			$this->err()->setErrors(_('Indirizzo: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Indirizzo: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Numero Civico
@@ -268,7 +262,6 @@ class Sede extends Tag {
 			&& $xmldata->NumeroCivico instanceof SimpleXMLElement
 			&& (string) $xmldata->NumeroCivico != ''
 		){
-			
 			$this->__set('NumeroCivico', (string) $xmldata->NumeroCivico);
 		}
 		
@@ -277,11 +270,10 @@ class Sede extends Tag {
 			&& $xmldata->CAP instanceof SimpleXMLElement
 			&& (string) $xmldata->CAP != ''
 		){
-			
 			$this->__set('CAP', (string) $xmldata->CAP);
 		} else{
 			
-			$this->err()->setErrors(_('CAP: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('CAP: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Comune
@@ -289,11 +281,10 @@ class Sede extends Tag {
 			&& $xmldata->Comune instanceof SimpleXMLElement
 			&& (string) $xmldata->Comune != ''
 		){
-			
 			$this->__set('Comune', (string) $xmldata->Comune);
 		} else{
 			
-			$this->err()->setErrors(_('Comune: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Comune: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Provincia
@@ -301,7 +292,6 @@ class Sede extends Tag {
 			&& $xmldata->Provincia instanceof SimpleXMLElement
 			&& (string) $xmldata->Provincia != ''
 		){
-			
 			$this->__set('Provincia', (string) $xmldata->Provincia);
 		}
 		
@@ -310,11 +300,10 @@ class Sede extends Tag {
 			&& $xmldata->Nazione instanceof SimpleXMLElement
 			&& (string) $xmldata->Nazione != ''
 		){
-			
 			$this->__set('Nazione', (string) $xmldata->Nazione);
 		} else{
 			
-			$this->err()->setErrors(_('Nazione: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Nazione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

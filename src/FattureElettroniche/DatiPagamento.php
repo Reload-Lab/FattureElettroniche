@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -15,10 +15,14 @@ use \ReflectionProperty;
 use \SimpleXMLElement;
 use \DOMNode;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class DatiPagamento extends Tag implements ArrayAccess {
+class DatiPagamento extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -66,7 +70,7 @@ class DatiPagamento extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$CP[$value])){
 						
-						$this->err()->setErrors(_('Condizioni Pagamento "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Condizioni Pagamento "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -106,7 +110,7 @@ class DatiPagamento extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Condizioni Pagamento: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Condizioni Pagamento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Dettaglio Pagamento
@@ -125,11 +129,11 @@ class DatiPagamento extends Tag implements ArrayAccess {
 						}
 					} else{
 						
-						$this->err()->setErrors(_('Dettaglio Pagamento: Il tipo complesso è obbligatorio in '.$classname));
+						$this->err()->setErrors(_('Dettaglio Pagamento: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 					}
 				} else{
 					
-					$this->err()->setErrors(_('Dettaglio Pagamento: Il tipo complesso è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Dettaglio Pagamento: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				array_push($arr, $elem);
@@ -155,18 +159,16 @@ class DatiPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->CondizioniPagamento instanceof SimpleXMLElement
 			&& (string) $xmldata->CondizioniPagamento != ''
 		){
-			
 			$this->__set('CondizioniPagamento', (string) $xmldata->CondizioniPagamento);
 		} else{
 			
-			$this->err()->setErrors(_('Condizioni Pagamento: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Condizioni Pagamento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Dettaglio Pagamento
 		if(isset($xmldata->DettaglioPagamento)
 			&& $xmldata->DettaglioPagamento instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DettaglioPagamento->count(); $k++){
 				
 				$this->__DettaglioPagamento[$k] = $this->DettaglioPagamento[$k]
@@ -174,7 +176,7 @@ class DatiPagamento extends Tag implements ArrayAccess {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dettaglio Pagamento: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dettaglio Pagamento: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

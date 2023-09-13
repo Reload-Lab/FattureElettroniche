@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -81,8 +81,7 @@ class IscrizioneREA extends Tag {
 					if(!preg_match('/^[A-Z0-9]+$/', $value) 
 						|| strlen($value) != 2
 					){
-						
-						$this->err()->setErrors(_('Ufficio "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Ufficio "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -93,8 +92,7 @@ class IscrizioneREA extends Tag {
 					if(!preg_match('/^[a-zA-Z0-9-]+$/', $value) 
 						|| strlen($value) > 20
 					){
-						
-						$this->err()->setErrors(_('Numero REA "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.$classname));
+						$this->err()->setErrors(_('Numero REA "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -106,8 +104,7 @@ class IscrizioneREA extends Tag {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Capitale Sociale "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Capitale Sociale "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -119,7 +116,7 @@ class IscrizioneREA extends Tag {
 					
 					if(!isset(Costant::$SU[$value])){
 						
-						$this->err()->setErrors(_('Socio Unico "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Socio Unico "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -131,7 +128,7 @@ class IscrizioneREA extends Tag {
 					
 					if(!isset(Costant::$SL[$value])){
 						
-						$this->err()->setErrors(_('Stato Liquidazione "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Stato Liquidazione "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -165,7 +162,7 @@ class IscrizioneREA extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Ufficio: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Ufficio: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Numero REA
@@ -176,7 +173,7 @@ class IscrizioneREA extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Numero REA: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Numero REA: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Capitale Sociale
@@ -203,7 +200,7 @@ class IscrizioneREA extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Stato Liquidazione: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Stato Liquidazione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $elem;
@@ -225,11 +222,10 @@ class IscrizioneREA extends Tag {
 			&& $xmldata->Ufficio instanceof SimpleXMLElement
 			&& (string) $xmldata->Ufficio != ''
 		){
-			
 			$this->__set('Ufficio', (string) $xmldata->Ufficio);
 		} else{
 			
-			$this->err()->setErrors(_('Ufficio: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Ufficio: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Numero REA
@@ -237,11 +233,10 @@ class IscrizioneREA extends Tag {
 			&& $xmldata->NumeroREA instanceof SimpleXMLElement
 			&& (string) $xmldata->NumeroREA != ''
 		){
-			
 			$this->__set('NumeroREA', (string) $xmldata->NumeroREA);
 		} else{
 			
-			$this->err()->setErrors(_('Numero REA: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Numero REA: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Capitale Sociale
@@ -249,7 +244,6 @@ class IscrizioneREA extends Tag {
 			&& $xmldata->CapitaleSociale instanceof SimpleXMLElement
 			&& (string) $xmldata->CapitaleSociale != ''
 		){
-			
 			$this->__set('CapitaleSociale', (string) $xmldata->CapitaleSociale);
 		}
 		
@@ -258,7 +252,6 @@ class IscrizioneREA extends Tag {
 			&& $xmldata->SocioUnico instanceof SimpleXMLElement
 			&& (string) $xmldata->SocioUnico != ''
 		){
-			
 			$this->__set('SocioUnico', (string) $xmldata->SocioUnico);
 		}
 		
@@ -267,11 +260,10 @@ class IscrizioneREA extends Tag {
 			&& $xmldata->StatoLiquidazione instanceof SimpleXMLElement
 			&& (string) $xmldata->StatoLiquidazione != ''
 		){
-			
 			$this->__set('StatoLiquidazione', (string) $xmldata->StatoLiquidazione);
 		} else{
 			
-			$this->err()->setErrors(_('Stato Liquidazione: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Stato Liquidazione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

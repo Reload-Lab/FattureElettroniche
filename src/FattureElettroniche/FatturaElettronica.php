@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -38,7 +38,7 @@ class FatturaElettronica extends Tag {
 	 *
 	 * @return string
 	 */
-	public function getXml($filename = null)
+	public function getXml($filename = null, $throw = false, $SistemaEmittente = null)
 	{
 		$reflect = new ReflectionClass($this);
 		$classname = $reflect->getShortName();
@@ -49,6 +49,18 @@ class FatturaElettronica extends Tag {
 		$elem->setAttribute('versione', 'FPR12');
 		$elem->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:ds', 'http://www.w3.org/2000/09/xmldsig#');
 		$elem->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+		
+		// Sistema Emittente
+		if(isset($SistemaEmittente)){
+			
+			if(!is_string($SistemaEmittente) || strlen($SistemaEmittente) > 10){
+				
+				$this->err()->setErrors(_('L\'attributo SistemaEmittente deve essere una stringa non più lunga di 10 caratteri in '.__FILE__.' on line '.__LINE__));
+			} else{
+				
+				$elem->setAttribute('SistemaEmittente', substr($SistemaEmittente, 0, 10));
+			}
+		}
 		
 		// Fattura Elettronica Header
 		if($this->__FatturaElettronicaHeader instanceof FatturaElettronicaHeader){
@@ -61,7 +73,7 @@ class FatturaElettronica extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Fattura Elettronica Header: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Fattura Elettronica Header: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Fattura Elettronica Body
@@ -80,19 +92,21 @@ class FatturaElettronica extends Tag {
 				}
 			} else{
 				
-				$this->err()->setErrors(_('Fattura Elettronica Body: Il tipo complesso è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Fattura Elettronica Body: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Fattura Elettronica Body: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Fattura Elettronica Body: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 
-		if($this->thr()){
+		if($this->thr($throw)){
 			
 			self::$_dom->appendChild($elem);
 			
 			return $this->saveXML($filename);
 		}
+		
+		return false;
 	}
 	
 	/**
@@ -134,25 +148,23 @@ class FatturaElettronica extends Tag {
 		if(isset($xmldata->FatturaElettronicaHeader) 
 			&& $xmldata->FatturaElettronicaHeader instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->FatturaElettronicaHeader->count() == 1){
 				
 				$this->__FatturaElettronicaHeader = $this->FatturaElettronicaHeader
 					->loopXml($xmldata->FatturaElettronicaHeader);
 			} else{
 				
-				$this->err()->setErrors(_('Fattura Elettronica Header: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Fattura Elettronica Header: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Fattura Elettronica Header: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Fattura Elettronica Header: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Fattura Elettronica Body
 		if(isset($xmldata->FatturaElettronicaBody)
 			&& $xmldata->FatturaElettronicaBody instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->FatturaElettronicaBody->count(); $k++){
 				
 				$this->__FatturaElettronicaBody[$k] = $this->FatturaElettronicaBody[$k]
@@ -160,7 +172,7 @@ class FatturaElettronica extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Fattura Elettronica Body: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Fattura Elettronica Body: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

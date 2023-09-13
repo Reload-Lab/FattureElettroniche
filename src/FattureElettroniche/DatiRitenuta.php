@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -14,10 +14,14 @@ use \ReflectionClass;
 use \ReflectionProperty;
 use \SimpleXMLElement;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class DatiRitenuta extends Tag implements ArrayAccess {
+class DatiRitenuta extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -82,7 +86,7 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$TR[$value])){
 						
-						$this->err()->setErrors(_('Tipo Ritenuta "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Tipo Ritenuta "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -94,8 +98,7 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Importo Ritenuta "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Importo Ritenuta "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -107,8 +110,7 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 6
 					){
-						
-						$this->err()->setErrors(_('Aliquota Ritenuta "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.$classname));
+						$this->err()->setErrors(_('Aliquota Ritenuta "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -121,8 +123,7 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 2
 					){
-						
-						$this->err()->setErrors(_('Causale Pagamento "'.$value.'": Formato alfanumerico; lunghezza di massimo 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Causale Pagamento "'.$value.'": Formato alfanumerico; lunghezza di massimo 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -162,7 +163,7 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Tipo Ritenuta: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Tipo Ritenuta: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Importo Ritenuta
@@ -173,7 +174,7 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Importo Ritenuta: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Importo Ritenuta: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Aliquota Ritenuta
@@ -184,7 +185,7 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Aliquota Ritenuta: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Aliquota Ritenuta: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Causale Pagamento
@@ -195,7 +196,7 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Causale Pagamento: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Causale Pagamento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				array_push($arr, $elem);
@@ -221,11 +222,10 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 			&& $xmldata->TipoRitenuta instanceof SimpleXMLElement
 			&& (string) $xmldata->TipoRitenuta != ''
 		){
-			
 			$this->__set('TipoRitenuta', (string) $xmldata->TipoRitenuta);
 		} else{
 			
-			$this->err()->setErrors(_('Tipo Ritenuta: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Tipo Ritenuta: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Importo Ritenuta
@@ -233,11 +233,10 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 			&& $xmldata->ImportoRitenuta instanceof SimpleXMLElement
 			&& (string) $xmldata->ImportoRitenuta != ''
 		){
-			
 			$this->__set('ImportoRitenuta', (string) $xmldata->ImportoRitenuta);
 		} else{
 			
-			$this->err()->setErrors(_('Importo Ritenuta: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Importo Ritenuta: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Aliquota Ritenuta
@@ -245,11 +244,10 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 			&& $xmldata->AliquotaRitenuta instanceof SimpleXMLElement
 			&& (string) $xmldata->AliquotaRitenuta != ''
 		){
-			
 			$this->__set('AliquotaRitenuta', (string) $xmldata->AliquotaRitenuta);
 		} else{
 			
-			$this->err()->setErrors(_('Aliquota Ritenuta: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Aliquota Ritenuta: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Causale Pagamento
@@ -257,11 +255,10 @@ class DatiRitenuta extends Tag implements ArrayAccess {
 			&& $xmldata->CausalePagamento instanceof SimpleXMLElement
 			&& (string) $xmldata->CausalePagamento != ''
 		){
-			
 			$this->__set('CausalePagamento', (string) $xmldata->CausalePagamento);
 		} else{
 			
-			$this->err()->setErrors(_('Causale Pagamento: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Causale Pagamento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

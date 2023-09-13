@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -34,11 +34,14 @@ abstract class Tag {
 	 * 
 	 * @return ErrorsHandler object
 	 */
-	public function thr()
+	public function thr($throw = false)
 	{
 		if($this->err()->hasErrors()){
 			
-			throw $this->err();
+			if($throw){
+				
+				throw $this->err();
+			}
 			return;
 		}
 		
@@ -78,7 +81,6 @@ abstract class Tag {
 				if(!($this->{$prop} instanceof $classname)
 					&& class_exists($classname)
 				){
-					
 					$this->{$prop} = new $classname();
 				}
 				

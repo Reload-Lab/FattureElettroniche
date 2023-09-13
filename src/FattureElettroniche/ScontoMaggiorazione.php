@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -14,10 +14,14 @@ use \ReflectionClass;
 use \ReflectionProperty;
 use \SimpleXMLElement;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class ScontoMaggiorazione extends Tag implements ArrayAccess {
+class ScontoMaggiorazione extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -74,7 +78,7 @@ class ScontoMaggiorazione extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$TSM[$value])){
 						
-						$this->err()->setErrors(_('Tipo "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Tipo "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -86,8 +90,7 @@ class ScontoMaggiorazione extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 6
 					){
-						
-						$this->err()->setErrors(_('Percentuale "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.$classname));
+						$this->err()->setErrors(_('Percentuale "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -99,8 +102,7 @@ class ScontoMaggiorazione extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 21
 					){
-						
-						$this->err()->setErrors(_('Importo "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.$classname));
+						$this->err()->setErrors(_('Importo "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -140,7 +142,7 @@ class ScontoMaggiorazione extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Tipo: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Tipo: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Percentuale
@@ -182,11 +184,10 @@ class ScontoMaggiorazione extends Tag implements ArrayAccess {
 			&& $xmldata->Tipo instanceof SimpleXMLElement
 			&& (string) $xmldata->Tipo != ''
 		){
-			
 			$this->__set('Tipo', (string) $xmldata->Tipo);
 		} else{
 			
-			$this->err()->setErrors(_('Tipo: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Tipo: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Percentuale
@@ -194,7 +195,6 @@ class ScontoMaggiorazione extends Tag implements ArrayAccess {
 			&& $xmldata->Percentuale instanceof SimpleXMLElement
 			&& (string) $xmldata->Percentuale != ''
 		){
-			
 			$this->__set('Percentuale', (string) $xmldata->Percentuale);
 		}
 		
@@ -203,7 +203,6 @@ class ScontoMaggiorazione extends Tag implements ArrayAccess {
 			&& $xmldata->Importo instanceof SimpleXMLElement
 			&& (string) $xmldata->Importo != ''
 		){
-			
 			$this->__set('Importo', (string) $xmldata->Importo);
 		}
 		

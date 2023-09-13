@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -58,7 +58,7 @@ class ErrorsHandler extends Exception {
 	 *
 	 * @set errors
 	 * 
-	 * @return Authentication object
+	 * @return ErrorsHandler object
 	 */
 	public function setErrors($err)
 	{
@@ -117,5 +117,17 @@ class ErrorsHandler extends Exception {
 	public function showErrors()
 	{
 		return count($this->errors) > 0? implode($this->imploder, $this->errors): '';
+	}
+
+	/**
+	 * Pulisce array errori
+	 *
+	 * @return ErrorsHandler object
+	 */
+	public function clearErrors()
+	{
+		$this->errors = array();
+		
+		return $this;
 	}
 }

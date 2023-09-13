@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -12,8 +12,10 @@
 namespace F5\FattureElettroniche;
 use \ReflectionClass;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class Causale extends Tag implements ArrayAccess {
+class Causale extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	/**
 	 * Instances
@@ -21,6 +23,8 @@ class Causale extends Tag implements ArrayAccess {
 	 * @var array of object
 	 */
 	protected $_values = array();
+	
+	private $position = 0;
 	
 	/**
 	 * Restituisce gli elementi relativi a questo oggetto 
@@ -56,8 +60,7 @@ class Causale extends Tag implements ArrayAccess {
 		if(!is_string($value) 
 			|| strlen($value) > 200
 		){
-			
-			$this->err()->setErrors(_('Causale "'.$value.'": Formato alfanumerico; lunghezza massima di 200 caratteri in '.$classname));
+			$this->err()->setErrors(_('Causale "'.$value.'": Formato alfanumerico; lunghezza massima di 200 caratteri in '.__FILE__.' on line '.__LINE__));
 			return;
 		}
 		
@@ -84,4 +87,34 @@ class Causale extends Tag implements ArrayAccess {
 	{
 		return isset($this->_values[$offset])? $this->_values[$offset]: null;
     }
+	
+	public function rewind()
+	{
+		$this->position = 0;
+	}
+
+	public function current()
+	{
+		return $this->_values[$this->position];
+	}
+
+	public function key()
+	{
+		return $this->position;
+	}
+
+	public function next()
+	{
+		++$this->position;
+	}
+
+	public function valid()
+	{
+		return isset($this->_values[$this->position]);
+	}
+	
+	public function count()
+	{
+		return count($this->_values);
+	}
 }

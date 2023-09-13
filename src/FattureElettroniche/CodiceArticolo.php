@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -14,10 +14,14 @@ use \ReflectionClass;
 use \ReflectionProperty;
 use \SimpleXMLElement;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class CodiceArticolo extends Tag implements ArrayAccess {
+class CodiceArticolo extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -65,8 +69,7 @@ class CodiceArticolo extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 35
 					){
-						
-						$this->err()->setErrors(_('Codice Tipo "'.$value.'": Formato alfanumerico; lunghezza massima di 35 caratteri in '.$classname));
+						$this->err()->setErrors(_('Codice Tipo "'.$value.'": Formato alfanumerico; lunghezza massima di 35 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -77,8 +80,7 @@ class CodiceArticolo extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 35
 					){
-						
-						$this->err()->setErrors(_('Codice Valore "'.$value.'": Formato alfanumerico; lunghezza massima di 35 caratteri in '.$classname));
+						$this->err()->setErrors(_('Codice Valore "'.$value.'": Formato alfanumerico; lunghezza massima di 35 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -118,7 +120,7 @@ class CodiceArticolo extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Codice Tipo: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Codice Tipo: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Codice Valore
@@ -129,7 +131,7 @@ class CodiceArticolo extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Codice Valore: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Codice Valore: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				array_push($arr, $elem);
@@ -155,11 +157,10 @@ class CodiceArticolo extends Tag implements ArrayAccess {
 			&& $xmldata->CodiceTipo instanceof SimpleXMLElement
 			&& (string) $xmldata->CodiceTipo != ''
 		){
-			
 			$this->__set('CodiceTipo', (string) $xmldata->CodiceTipo);
 		} else{
 			
-			$this->err()->setErrors(_('Codice Tipo: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Codice Tipo: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Codice Valore
@@ -167,11 +168,10 @@ class CodiceArticolo extends Tag implements ArrayAccess {
 			&& $xmldata->CodiceValore instanceof SimpleXMLElement
 			&& (string) $xmldata->CodiceValore != ''
 		){
-			
 			$this->__set('CodiceValore', (string) $xmldata->CodiceValore);
 		} else{
 			
-			$this->err()->setErrors(_('Codice Valore: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Codice Valore: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -56,7 +56,7 @@ class DatiBollo extends Tag {
 					
 					if(!isset(Costant::$BV[$value])){
 						
-						$this->err()->setErrors(_('Bollo Virtuale "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Bollo Virtuale "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -68,8 +68,7 @@ class DatiBollo extends Tag {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Importo Bollo "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Importo Bollo "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -103,7 +102,7 @@ class DatiBollo extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Bollo Virtuale: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Bollo Virtuale: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Importo Bollo
@@ -133,11 +132,10 @@ class DatiBollo extends Tag {
 			&& $xmldata->BolloVirtuale instanceof SimpleXMLElement
 			&& (string) $xmldata->BolloVirtuale != ''
 		){
-			
 			$this->__set('BolloVirtuale', (string) $xmldata->BolloVirtuale);
 		} else{
 			
-			$this->err()->setErrors(_('Bollo Virtuale: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Bollo Virtuale: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Importo Ritenuta
@@ -145,11 +143,10 @@ class DatiBollo extends Tag {
 			&& $xmldata->ImportoRitenuta instanceof SimpleXMLElement
 			&& (string) $xmldata->ImportoRitenuta != ''
 		){
-			
 			$this->__set('ImportoRitenuta', (string) $xmldata->ImportoRitenuta);
 		} else{
 			
-			$this->err()->setErrors(_('Importo Ritenuta: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Importo Ritenuta: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Importo Bollo
@@ -157,7 +154,6 @@ class DatiBollo extends Tag {
 			&& $xmldata->ImportoBollo instanceof SimpleXMLElement
 			&& (string) $xmldata->ImportoBollo != ''
 		){
-			
 			$this->__set('ImportoBollo', (string) $xmldata->ImportoBollo);
 		}
 		

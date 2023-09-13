@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -56,8 +56,7 @@ class ContattiTrasmittente extends Tag {
 						|| strlen($value) < 5 
 						|| strlen($value) > 12
 					){
-						
-						$this->err()->setErrors(_('Telefono "'.$value.'": Formato alfanumerico; lunghezza che va da 5 a 12 caratteri in '.$classname));
+						$this->err()->setErrors(_('Telefono "'.$value.'": Formato alfanumerico; lunghezza che va da 5 a 12 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -69,8 +68,7 @@ class ContattiTrasmittente extends Tag {
 						|| strlen($value) < 7 
 						|| strlen($value) > 256
 					){
-						
-						$this->err()->setErrors(_('Email "'.$value.'": Formato alfanumerico; lunghezza che va da 7 a 256 caratteri in '.$classname));
+						$this->err()->setErrors(_('Email "'.$value.'": Formato alfanumerico; lunghezza che va da 7 a 256 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -131,7 +129,6 @@ class ContattiTrasmittente extends Tag {
 			&& $xmldata->Telefono instanceof SimpleXMLElement
 			&& (string) $xmldata->Telefono != ''
 		){
-			
 			$this->__set('Telefono', (string) $xmldata->Telefono);
 		}
 		
@@ -140,7 +137,6 @@ class ContattiTrasmittente extends Tag {
 			&& $xmldata->Email instanceof SimpleXMLElement
 			&& (string) $xmldata->Email != ''
 		){
-			
 			$this->__set('Email', (string) $xmldata->Email);
 		}
 		

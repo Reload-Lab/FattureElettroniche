@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -15,10 +15,14 @@ use \ReflectionProperty;
 use \SimpleXMLElement;
 use \DOMNode;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class DettaglioLinee extends Tag implements ArrayAccess {
+class DettaglioLinee extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -175,8 +179,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					if(!preg_match('/^[0-9]+$/', $value) 
 						|| strlen($value) > 4
 					){
-						
-						$this->err()->setErrors(_('Numero Linea "'.$value.'": Formato numerico; lunghezza massima di 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Numero Linea "'.$value.'": Formato numerico; lunghezza massima di 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -188,7 +191,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$TCP[$value])){
 						
-						$this->err()->setErrors(_('Tipo Cessione Prestazione "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Tipo Cessione Prestazione "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -199,8 +202,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 1000
 					){
-						
-						$this->err()->setErrors(_('Descrizione "'.$value.'": Formato alfanumerico; lunghezza massima di 1000 caratteri in '.$classname));
+						$this->err()->setErrors(_('Descrizione "'.$value.'": Formato alfanumerico; lunghezza massima di 1000 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -212,8 +214,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 21
 					){
-						
-						$this->err()->setErrors(_('Quantita "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.$classname));
+						$this->err()->setErrors(_('Quantita "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -224,8 +225,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 10
 					){
-						
-						$this->err()->setErrors(_('Unita Misura "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.$classname));
+						$this->err()->setErrors(_('Unita Misura "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -236,8 +236,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data Inizio Periodo "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data Inizio Periodo "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -248,8 +247,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data Fine Periodo "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data Fine Periodo "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -261,8 +259,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 21
 					){
-						
-						$this->err()->setErrors(_('Prezzo Unitario "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.$classname));
+						$this->err()->setErrors(_('Prezzo Unitario "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -274,8 +271,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 21
 					){
-						
-						$this->err()->setErrors(_('Prezzo Totale "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.$classname));
+						$this->err()->setErrors(_('Prezzo Totale "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 21 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -287,8 +283,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 6
 					){
-						
-						$this->err()->setErrors(_('Aliquota IVA "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.$classname));
+						$this->err()->setErrors(_('Aliquota IVA "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -300,7 +295,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$RTL[$value])){
 						
-						$this->err()->setErrors(_('Ritenuta "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Ritenuta "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -312,7 +307,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$NT[$value])){
 						
-						$this->err()->setErrors(_('Natura "'.$value.'": Formato alfanumerico; lunghezza da 2 a 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Natura "'.$value.'": Formato alfanumerico; lunghezza da 2 a 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -323,8 +318,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 20
 					){
-						
-						$this->err()->setErrors(_('Riferimento Amministrazione "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.$classname));
+						$this->err()->setErrors(_('Riferimento Amministrazione "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -364,7 +358,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Numero Linea: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Numero Linea: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Tipo Cessione Prestazione
@@ -400,7 +394,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Descrizione: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Descrizione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Quantita
@@ -443,7 +437,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Prezzo Unitario: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Prezzo Unitario: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Sconto Maggiorazione
@@ -471,7 +465,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Prezzo Totale: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Prezzo Totale: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Aliquota IVA
@@ -482,7 +476,7 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Ritenuta
@@ -549,11 +543,10 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->NumeroLinea instanceof SimpleXMLElement
 			&& (string) $xmldata->NumeroLinea != ''
 		){
-			
 			$this->__set('NumeroLinea', (string) $xmldata->NumeroLinea);
 		} else{
 			
-			$this->err()->setErrors(_('Numero Linea: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Numero Linea: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Tipo Cessione Prestazione
@@ -561,7 +554,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->TipoCessionePrestazione instanceof SimpleXMLElement
 			&& (string) $xmldata->TipoCessionePrestazione != ''
 		){
-			
 			$this->__set('TipoCessionePrestazione', (string) $xmldata->TipoCessionePrestazione);
 		}
 		
@@ -569,7 +561,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 		if(isset($xmldata->CodiceArticolo)
 			&& $xmldata->CodiceArticolo instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->CodiceArticolo->count(); $k++){
 				
 				$this->__CodiceArticolo[$k] = $this->CodiceArticolo[$k]
@@ -582,11 +573,10 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->Descrizione instanceof SimpleXMLElement
 			&& (string) $xmldata->Descrizione != ''
 		){
-			
 			$this->__set('Descrizione', (string) $xmldata->Descrizione);
 		} else{
 			
-			$this->err()->setErrors(_('Descrizione: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Descrizione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Quantita
@@ -594,7 +584,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->Quantita instanceof SimpleXMLElement
 			&& (string) $xmldata->Quantita != ''
 		){
-			
 			$this->__set('Quantita', (string) $xmldata->Quantita);
 		}
 		
@@ -603,7 +592,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->UnitaMisura instanceof SimpleXMLElement
 			&& (string) $xmldata->UnitaMisura != ''
 		){
-			
 			$this->__set('UnitaMisura', (string) $xmldata->UnitaMisura);
 		}
 		
@@ -612,7 +600,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->DataInizioPeriodo instanceof SimpleXMLElement
 			&& (string) $xmldata->DataInizioPeriodo != ''
 		){
-			
 			$this->__set('DataInizioPeriodo', (string) $xmldata->DataInizioPeriodo);
 		}
 		
@@ -621,7 +608,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->DataFinePeriodo instanceof SimpleXMLElement
 			&& (string) $xmldata->DataFinePeriodo != ''
 		){
-			
 			$this->__set('DataFinePeriodo', (string) $xmldata->DataFinePeriodo);
 		}
 		
@@ -630,18 +616,16 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->PrezzoUnitario instanceof SimpleXMLElement
 			&& (string) $xmldata->PrezzoUnitario != ''
 		){
-			
 			$this->__set('PrezzoUnitario', (string) $xmldata->PrezzoUnitario);
 		} else{
 			
-			$this->err()->setErrors(_('Prezzo Unitario: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Prezzo Unitario: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Sconto Maggiorazione
 		if(isset($xmldata->ScontoMaggiorazione)
 			&& $xmldata->ScontoMaggiorazione instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->ScontoMaggiorazione->count(); $k++){
 				
 				$this->__ScontoMaggiorazione[$k] = $this->ScontoMaggiorazione[$k]
@@ -654,11 +638,10 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->PrezzoTotale instanceof SimpleXMLElement
 			&& (string) $xmldata->PrezzoTotale != ''
 		){
-			
 			$this->__set('PrezzoTotale', (string) $xmldata->PrezzoTotale);
 		} else{
 			
-			$this->err()->setErrors(_('Prezzo Totale: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Prezzo Totale: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Aliquota IVA
@@ -666,11 +649,10 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->AliquotaIVA instanceof SimpleXMLElement
 			&& (string) $xmldata->AliquotaIVA != ''
 		){
-			
 			$this->__set('AliquotaIVA', (string) $xmldata->AliquotaIVA);
 		} else{
 			
-			$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Ritenuta
@@ -678,7 +660,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->Ritenuta instanceof SimpleXMLElement
 			&& (string) $xmldata->Ritenuta != ''
 		){
-			
 			$this->__set('Ritenuta', (string) $xmldata->Ritenuta);
 		}
 		
@@ -687,7 +668,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->Natura instanceof SimpleXMLElement
 			&& (string) $xmldata->Natura != ''
 		){
-			
 			$this->__set('Natura', (string) $xmldata->Natura);
 		}
 		
@@ -696,7 +676,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 			&& $xmldata->RiferimentoAmministrazione instanceof SimpleXMLElement
 			&& (string) $xmldata->RiferimentoAmministrazione != ''
 		){
-			
 			$this->__set('RiferimentoAmministrazione', (string) $xmldata->RiferimentoAmministrazione);
 		}
 		
@@ -704,7 +683,6 @@ class DettaglioLinee extends Tag implements ArrayAccess {
 		if(isset($xmldata->AltriDatiGestionali)
 			&& $xmldata->AltriDatiGestionali instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->AltriDatiGestionali->count(); $k++){
 				
 				$this->__AltriDatiGestionali[$k] = $this->AltriDatiGestionali[$k]

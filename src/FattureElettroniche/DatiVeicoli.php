@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -55,8 +55,7 @@ class DatiVeicoli extends Tag {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -67,8 +66,7 @@ class DatiVeicoli extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Totale Percorso "'.$value.'": Formato alfanumerico; lunghezza massima di 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Totale Percorso "'.$value.'": Formato alfanumerico; lunghezza massima di 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -102,7 +100,7 @@ class DatiVeicoli extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Data: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Data: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Totale Percorso
@@ -113,7 +111,7 @@ class DatiVeicoli extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Totale Percorso: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Totale Percorso: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $elem;
@@ -135,11 +133,10 @@ class DatiVeicoli extends Tag {
 			&& $xmldata->Data instanceof SimpleXMLElement
 			&& (string) $xmldata->Data != ''
 		){
-			
 			$this->__set('Data', (string) $xmldata->Data);
 		} else{
 			
-			$this->err()->setErrors(_('Data: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Data: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Totale Percorso
@@ -147,11 +144,10 @@ class DatiVeicoli extends Tag {
 			&& $xmldata->TotalePercorso instanceof SimpleXMLElement
 			&& (string) $xmldata->TotalePercorso != ''
 		){
-			
 			$this->__set('TotalePercorso', (string) $xmldata->TotalePercorso);
 		} else{
 			
-			$this->err()->setErrors(_('Totale Percorso: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Totale Percorso: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

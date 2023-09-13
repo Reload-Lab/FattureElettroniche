@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -83,8 +83,7 @@ class CedentePrestatore extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 20
 					){
-						
-						$this->err()->setErrors(_('Riferimento Amministrazione "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.$classname));
+						$this->err()->setErrors(_('Riferimento Amministrazione "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -121,7 +120,7 @@ class CedentePrestatore extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Sede
@@ -135,7 +134,7 @@ class CedentePrestatore extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Sede: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Sede: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Stabile Organizzazione
@@ -197,50 +196,47 @@ class CedentePrestatore extends Tag {
 		if(isset($xmldata->DatiAnagrafici) 
 			&& $xmldata->DatiAnagrafici instanceof SimpleXMLElement
 		){
-
 			if($xmldata->DatiAnagrafici->count() == 1){
 				
 				$this->__DatiAnagrafici = $this->DatiAnagrafici
 					->loopXml($xmldata->DatiAnagrafici, 'CedentePrestatore');
 			} else{
 				
-				$this->err()->setErrors(_('Dati Anagrafici: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Anagrafici: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 
 		// Sede
 		if(isset($xmldata->Sede) 
 			&& $xmldata->Sede instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->Sede->count() == 1){
 				
 				$this->__Sede = $this->Sede
 					->loopXml($xmldata->Sede);
 			} else{
 				
-				$this->err()->setErrors(_('Sede: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Sede: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Sede: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Sede: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Stabile Organizzazione
 		if(isset($xmldata->StabileOrganizzazione) 
 			&& $xmldata->StabileOrganizzazione instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->StabileOrganizzazione->count() == 1){
 				
 				$this->__StabileOrganizzazione = $this->StabileOrganizzazione
 					->loopXml($xmldata->StabileOrganizzazione);
 			} else{
 				
-				$this->err()->setErrors(_('Stabile Organizzazione: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Stabile Organizzazione: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -248,14 +244,13 @@ class CedentePrestatore extends Tag {
 		if(isset($xmldata->IscrizioneREA) 
 			&& $xmldata->IscrizioneREA instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->IscrizioneREA->count() == 1){
 				
 				$this->__IscrizioneREA = $this->IscrizioneREA
 					->loopXml($xmldata->IscrizioneREA);
 			} else{
 				
-				$this->err()->setErrors(_('Iscrizione REA: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Iscrizione REA: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -263,14 +258,13 @@ class CedentePrestatore extends Tag {
 		if(isset($xmldata->Contatti) 
 			&& $xmldata->Contatti instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->Contatti->count() == 1){
 				
 				$this->__Contatti = $this->Contatti
 					->loopXml($xmldata->Contatti);
 			} else{
 				
-				$this->err()->setErrors(_('Contatti: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Contatti: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 
@@ -279,7 +273,6 @@ class CedentePrestatore extends Tag {
 			&& $xmldata->RiferimentoAmministrazione instanceof SimpleXMLElement
 			&& (string) $xmldata->RiferimentoAmministrazione != ''
 		){
-			
 			$this->__set('RiferimentoAmministrazione', (string) $xmldata->RiferimentoAmministrazione);
 		}
 		

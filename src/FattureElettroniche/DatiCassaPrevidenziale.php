@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -14,10 +14,14 @@ use \ReflectionClass;
 use \ReflectionProperty;
 use \SimpleXMLElement;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
+class DatiCassaPrevidenziale extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -114,7 +118,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$TC[$value])){
 						
-						$this->err()->setErrors(_('Tipo Cassa "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Tipo Cassa "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -126,8 +130,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 6
 					){
-						
-						$this->err()->setErrors(_('Aliquota Cassa "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.$classname));
+						$this->err()->setErrors(_('Aliquota Cassa "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -139,8 +142,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Importo Contributo Cassa "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Importo Contributo Cassa "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -152,8 +154,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Imponibile Cassa "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Imponibile Cassa "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -165,8 +166,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 6
 					){
-						
-						$this->err()->setErrors(_('Aliquota IVA "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.$classname));
+						$this->err()->setErrors(_('Aliquota IVA "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -178,7 +178,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$RTC[$value])){
 						
-						$this->err()->setErrors(_('Ritenuta "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Ritenuta "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -190,7 +190,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$NT[$value])){
 						
-						$this->err()->setErrors(_('Natura "'.$value.'": Formato alfanumerico; lunghezza da 2 a 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Natura "'.$value.'": Formato alfanumerico; lunghezza da 2 a 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -201,8 +201,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 20
 					){
-						
-						$this->err()->setErrors(_('Riferimento Amministrazione "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.$classname));
+						$this->err()->setErrors(_('Riferimento Amministrazione "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -242,7 +241,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Tipo Cassa: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Tipo Cassa: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Aliquota Cassa
@@ -253,7 +252,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Aliquota Cassa: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Aliquota Cassa: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Importo Contributo Cassa
@@ -264,7 +263,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Importo Contributo Cassa: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Importo Contributo Cassa: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Imponibile Cassa
@@ -283,7 +282,7 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Ritenuta
@@ -333,11 +332,10 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 			&& $xmldata->TipoCassa instanceof SimpleXMLElement
 			&& (string) $xmldata->TipoCassa != ''
 		){
-			
 			$this->__set('TipoCassa', (string) $xmldata->TipoCassa);
 		} else{
 			
-			$this->err()->setErrors(_('Tipo Cassa: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Tipo Cassa: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Aliquota Cassa
@@ -345,11 +343,10 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 			&& $xmldata->AlCassa instanceof SimpleXMLElement
 			&& (string) $xmldata->AlCassa != ''
 		){
-			
 			$this->__set('AlCassa', (string) $xmldata->AlCassa);
 		} else{
 			
-			$this->err()->setErrors(_('Aliquota Cassa: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Aliquota Cassa: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Importo Contributo Cassa
@@ -357,11 +354,10 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 			&& $xmldata->ImportoContributoCassa instanceof SimpleXMLElement
 			&& (string) $xmldata->ImportoContributoCassa != ''
 		){
-			
 			$this->__set('ImportoContributoCassa', (string) $xmldata->ImportoContributoCassa);
 		} else{
 			
-			$this->err()->setErrors(_('Importo Contributo Cassa: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Importo Contributo Cassa: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Imponibile Cassa
@@ -369,7 +365,6 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 			&& $xmldata->ImponibileCassa instanceof SimpleXMLElement
 			&& (string) $xmldata->ImponibileCassa != ''
 		){
-			
 			$this->__set('ImponibileCassa', (string) $xmldata->ImponibileCassa);
 		}
 		
@@ -378,11 +373,10 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 			&& $xmldata->AliquotaIVA instanceof SimpleXMLElement
 			&& (string) $xmldata->AliquotaIVA != ''
 		){
-			
 			$this->__set('AliquotaIVA', (string) $xmldata->AliquotaIVA);
 		} else{
 			
-			$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Ritenuta
@@ -390,7 +384,6 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 			&& $xmldata->Ritenuta instanceof SimpleXMLElement
 			&& (string) $xmldata->Ritenuta != ''
 		){
-			
 			$this->__set('Ritenuta', (string) $xmldata->Ritenuta);
 		}
 		
@@ -399,7 +392,6 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 			&& $xmldata->Natura instanceof SimpleXMLElement
 			&& (string) $xmldata->Natura != ''
 		){
-			
 			$this->__set('Natura', (string) $xmldata->Natura);
 		}
 		
@@ -408,7 +400,6 @@ class DatiCassaPrevidenziale extends Tag implements ArrayAccess {
 			&& $xmldata->RiferimentoAmministrazione instanceof SimpleXMLElement
 			&& (string) $xmldata->RiferimentoAmministrazione != ''
 		){
-			
 			$this->__set('RiferimentoAmministrazione', (string) $xmldata->RiferimentoAmministrazione);
 		}
 		

@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -84,7 +84,7 @@ class FatturaElettronicaHeader extends Tag {
 					
 					if(!isset(Costant::$SE[$value])){
 						
-						$this->err()->setErrors(_('Soggetto Emittente "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Soggetto Emittente "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -121,7 +121,7 @@ class FatturaElettronicaHeader extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Trasmissione: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Trasmissione: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Cedente Prestatore
@@ -135,7 +135,7 @@ class FatturaElettronicaHeader extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Cedente Prestatore: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Cedente Prestatore: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Rappresentante Fiscale
@@ -160,7 +160,7 @@ class FatturaElettronicaHeader extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Cessionario Committente: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Cessionario Committente: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Terzo Intermediario O Soggetto Emittente
@@ -200,50 +200,47 @@ class FatturaElettronicaHeader extends Tag {
 		if(isset($xmldata->DatiTrasmissione) 
 			&& $xmldata->DatiTrasmissione instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiTrasmissione->count() == 1){
 				
 				$this->__DatiTrasmissione = $this->DatiTrasmissione
 					->loopXml($xmldata->DatiTrasmissione);
 			} else{
 				
-				$this->err()->setErrors(_('Dati Trasmissione: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Trasmissione: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Trasmissione: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Trasmissione: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Cedente Prestatore
 		if(isset($xmldata->CedentePrestatore) 
 			&& $xmldata->CedentePrestatore instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->CedentePrestatore->count() == 1){
 				
 				$this->__CedentePrestatore = $this->CedentePrestatore
 					->loopXml($xmldata->CedentePrestatore);
 			} else{
 				
-				$this->err()->setErrors(_('Cedente Prestatore: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Cedente Prestatore: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Cedente Prestatore: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Cedente Prestatore: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Rappresentante Fiscale
 		if(isset($xmldata->RappresentanteFiscale) 
 			&& $xmldata->RappresentanteFiscale instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->RappresentanteFiscale->count() == 1){
 				
 				$this->__RappresentanteFiscale = $this->RappresentanteFiscale
 					->loopXml($xmldata->RappresentanteFiscale);
 			} else{
 				
-				$this->err()->setErrors(_('Rappresentante Fiscale: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Rappresentante Fiscale: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -251,32 +248,30 @@ class FatturaElettronicaHeader extends Tag {
 		if(isset($xmldata->CessionarioCommittente) 
 			&& $xmldata->CessionarioCommittente instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->CessionarioCommittente->count() == 1){
 				
 				$this->__CessionarioCommittente = $this->CessionarioCommittente
 					->loopXml($xmldata->CessionarioCommittente);
 			} else{
 				
-				$this->err()->setErrors(_('Cessionario Committente: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Cessionario Committente: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Cessionario Committente: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Cessionario Committente: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Terzo Intermediario O Soggetto Emittente
 		if(isset($xmldata->TerzoIntermediarioOSoggettoEmittente) 
 			&& $xmldata->TerzoIntermediarioOSoggettoEmittente instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->TerzoIntermediarioOSoggettoEmittente->count() == 1){
 				
 				$this->__TerzoIntermediarioOSoggettoEmittente = $this->TerzoIntermediarioOSoggettoEmittente
 					->loopXml($xmldata->TerzoIntermediarioOSoggettoEmittente);
 			} else{
 				
-				$this->err()->setErrors(_('Terzo Intermediario O Soggetto Emittente: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Terzo Intermediario O Soggetto Emittente: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -285,7 +280,6 @@ class FatturaElettronicaHeader extends Tag {
 			&& $xmldata->SoggettoEmittente instanceof SimpleXMLElement
 			&& (string) $xmldata->DatiTrasmissione != ''
 		){
-			
 			$this->__set('SoggettoEmittente', (string) $xmldata->SoggettoEmittente);
 		}
 		

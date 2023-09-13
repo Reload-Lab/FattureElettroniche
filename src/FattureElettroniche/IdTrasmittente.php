@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -57,8 +57,7 @@ class IdTrasmittente extends Tag {
 					if(!preg_match('/^[A-Z]+$/', $value) 
 						|| strlen($value) != 2
 					){
-						
-						$this->err()->setErrors(_('Id Paese "'.$value.'": Sigla della nazione espressa secondo lo standard ISO 3166-1 alpha-2 code in '.$classname));
+						$this->err()->setErrors(_('Id Paese "'.$value.'": Sigla della nazione espressa secondo lo standard ISO 3166-1 alpha-2 code in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -69,8 +68,7 @@ class IdTrasmittente extends Tag {
 					if(!preg_match('/^[a-zA-Z0-9]+$/', $value) 
 						|| strlen($value) > 28
 					){
-						
-						$this->err()->setErrors(_('Id Codice "'.$value.'": Formato alfanumerico; lunghezza massima di 28 caratteri in '.$classname));
+						$this->err()->setErrors(_('Id Codice "'.$value.'": Formato alfanumerico; lunghezza massima di 28 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -104,7 +102,7 @@ class IdTrasmittente extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Id Paese: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Paese: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Id Codice
@@ -115,7 +113,7 @@ class IdTrasmittente extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Id Codice: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Codice: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $elem;
@@ -137,11 +135,10 @@ class IdTrasmittente extends Tag {
 			&& $xmldata->IdPaese instanceof SimpleXMLElement
 			&& (string) $xmldata->IdPaese != ''
 		){
-			
 			$this->__set('IdPaese', (string) $xmldata->IdPaese);
 		} else{
 			
-			$this->err()->setErrors(_('Id Paese: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Paese: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Id Codice
@@ -149,11 +146,10 @@ class IdTrasmittente extends Tag {
 			&& $xmldata->IdCodice instanceof SimpleXMLElement
 			&& (string) $xmldata->IdCodice != ''
 		){
-			
 			$this->__set('IdCodice', (string) $xmldata->IdCodice);
 		} else{
 			
-			$this->err()->setErrors(_('Id Codice: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Codice: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

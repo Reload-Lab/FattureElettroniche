@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -47,8 +47,7 @@ class DatiSAL extends Tag {
 					if(!preg_match('/^[0-9]+$/', $value) 
 						|| strlen($value) > 3
 					){
-						
-						$this->err()->setErrors(_('Riferimento Fase "'.$value.'": Formato numerico; lunghezza massima di 3 caratteri in '.$classname));
+						$this->err()->setErrors(_('Riferimento Fase "'.$value.'": Formato numerico; lunghezza massima di 3 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -82,7 +81,7 @@ class DatiSAL extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Riferimento Fase: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Riferimento Fase: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $elem;
@@ -104,11 +103,10 @@ class DatiSAL extends Tag {
 			&& $xmldata->RiferimentoFase instanceof SimpleXMLElement
 			&& (string) $xmldata->RiferimentoFase != ''
 		){
-			
 			$this->__set('RiferimentoFase', (string) $xmldata->RiferimentoFase);
 		} else{
 			
-			$this->err()->setErrors(_('Riferimento Fase: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Riferimento Fase: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

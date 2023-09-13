@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -14,10 +14,14 @@ use \ReflectionClass;
 use \SimpleXMLElement;
 use \DOMNode;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class FatturaElettronicaBody extends Tag implements ArrayAccess {
+class FatturaElettronicaBody extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -91,7 +95,7 @@ class FatturaElettronicaBody extends Tag implements ArrayAccess {
 					}
 				} else{
 					
-					$this->err()->setErrors(_('Dati Generali: Il tipo complesso è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Dati Generali: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Dati Beni Servizi
@@ -105,7 +109,7 @@ class FatturaElettronicaBody extends Tag implements ArrayAccess {
 					}
 				} else{
 					
-					$this->err()->setErrors(_('Dati Beni Servizi: Il tipo complesso è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Dati Beni Servizi: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Dati Veicoli
@@ -175,50 +179,47 @@ class FatturaElettronicaBody extends Tag implements ArrayAccess {
 		if(isset($xmldata->DatiGenerali) 
 			&& $xmldata->DatiGenerali instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiGenerali->count() == 1){
 				
 				$this->__DatiGenerali = $this->DatiGenerali
 					->loopXml($xmldata->DatiGenerali);
 			} else{
 				
-				$this->err()->setErrors(_('Dati Generali: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Generali: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Generali: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Generali: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Dati Beni Servizi
 		if(isset($xmldata->DatiBeniServizi) 
 			&& $xmldata->DatiBeniServizi instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiBeniServizi->count() == 1){
 				
 				$this->__DatiBeniServizi = $this->DatiBeniServizi
 					->loopXml($xmldata->DatiBeniServizi);
 			} else{
 				
-				$this->err()->setErrors(_('Dati Beni Servizi: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Beni Servizi: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Beni Servizi: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Beni Servizi: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Dati Veicoli
 		if(isset($xmldata->DatiVeicoli) 
 			&& $xmldata->DatiVeicoli instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiVeicoli->count() == 1){
 				
 				$this->__DatiVeicoli = $this->DatiVeicoli
 					->loopXml($xmldata->DatiVeicoli);
 			} else{
 				
-				$this->err()->setErrors(_('Dati Veicoli: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Veicoli: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -226,7 +227,6 @@ class FatturaElettronicaBody extends Tag implements ArrayAccess {
 		if(isset($xmldata->DatiPagamento)
 			&& $xmldata->DatiPagamento instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiPagamento->count(); $k++){
 				
 				$inst->__DatiPagamento[$k] = $this->DatiPagamento[$k]
@@ -238,7 +238,6 @@ class FatturaElettronicaBody extends Tag implements ArrayAccess {
 		if(isset($xmldata->Allegati)
 			&& $xmldata->Allegati instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->Allegati->count(); $k++){
 				
 				$inst->__Allegati[$k] = $this->Allegati[$k]

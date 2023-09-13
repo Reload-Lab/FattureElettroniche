@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -142,8 +142,7 @@ class DatiTrasporto extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 80
 					){
-						
-						$this->err()->setErrors(_('Mezzo Trasporto "'.$value.'": Formato alfanumerico; lunghezza massima di 80 caratteri in '.$classname));
+						$this->err()->setErrors(_('Mezzo Trasporto "'.$value.'": Formato alfanumerico; lunghezza massima di 80 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -154,8 +153,7 @@ class DatiTrasporto extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 100
 					){
-						
-						$this->err()->setErrors(_('Causale Trasporto "'.$value.'": Formato alfanumerico; lunghezza massima di 100 caratteri in '.$classname));
+						$this->err()->setErrors(_('Causale Trasporto "'.$value.'": Formato alfanumerico; lunghezza massima di 100 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -166,8 +164,7 @@ class DatiTrasporto extends Tag {
 					if(!preg_match('/^\d+$/', $value) 
 						|| strlen($value) > 4
 					){
-						
-						$this->err()->setErrors(_('Numero Colli "'.$value.'": Formato numerico; lunghezza massima di 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Numero Colli "'.$value.'": Formato numerico; lunghezza massima di 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -178,8 +175,7 @@ class DatiTrasporto extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 100
 					){
-						
-						$this->err()->setErrors(_('Descrizione "'.$value.'": Formato alfanumerico; lunghezza massima di 100 caratteri in '.$classname));
+						$this->err()->setErrors(_('Descrizione "'.$value.'": Formato alfanumerico; lunghezza massima di 100 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -190,8 +186,7 @@ class DatiTrasporto extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 10
 					){
-						
-						$this->err()->setErrors(_('Unita Misura Peso "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.$classname));
+						$this->err()->setErrors(_('Unita Misura Peso "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -203,8 +198,7 @@ class DatiTrasporto extends Tag {
 						|| strlen($value) < 4 
 						|| strlen($value) > 7
 					){
-						
-						$this->err()->setErrors(_('Peso Lordo "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 7 caratteri in '.$classname));
+						$this->err()->setErrors(_('Peso Lordo "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 7 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -216,8 +210,7 @@ class DatiTrasporto extends Tag {
 						|| strlen($value) < 4 
 						|| strlen($value) > 7
 					){
-						
-						$this->err()->setErrors(_('Peso Netto "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 7 caratteri in '.$classname));
+						$this->err()->setErrors(_('Peso Netto "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 7 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -228,8 +221,7 @@ class DatiTrasporto extends Tag {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/', $value) 
 						|| strlen($value) != 19
 					){
-						
-						$this->err()->setErrors(_('Data Ora Ritiro "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DDTHH:MM:SS in '.$classname));
+						$this->err()->setErrors(_('Data Ora Ritiro "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DDTHH:MM:SS in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -240,8 +232,7 @@ class DatiTrasporto extends Tag {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data Inizio Trasporto "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data Inizio Trasporto "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -254,8 +245,7 @@ class DatiTrasporto extends Tag {
 					if(!preg_match('/^[0-1A-Z]+$/', $value) 
 						|| strlen($value) != 3
 					){
-						
-						$this->err()->setErrors(_('Tipo Resa "'.$value.'": Codifica del termine di resa (Incoterms) espresso secondo lo standard ICC-Camera di Commercio Internazionale (formato alfanumerico di 3 caratteri) in '.$classname));
+						$this->err()->setErrors(_('Tipo Resa "'.$value.'": Codifica del termine di resa (Incoterms) espresso secondo lo standard ICC-Camera di Commercio Internazionale (formato alfanumerico di 3 caratteri) in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -266,8 +256,7 @@ class DatiTrasporto extends Tag {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/', $value) 
 						|| strlen($value) != 19
 					){
-						
-						$this->err()->setErrors(_('Data Ora Consegna "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DDTHH:MM:SS in '.$classname));
+						$this->err()->setErrors(_('Data Ora Consegna "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DDTHH:MM:SS in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -421,14 +410,13 @@ class DatiTrasporto extends Tag {
 		if(isset($xmldata->DatiAnagraficiVettore) 
 			&& $xmldata->DatiAnagraficiVettore instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiAnagraficiVettore->count() == 1){
 				
 				$this->__DatiAnagraficiVettore = $this->DatiAnagraficiVettore
 					->loopXml($xmldata->DatiAnagraficiVettore);
 			} else{
 				
-				$this->err()->setErrors(_('Dati Anagrafici Vettore: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Anagrafici Vettore: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -437,7 +425,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->MezzoTrasporto instanceof SimpleXMLElement
 			&& (string) $xmldata->MezzoTrasporto != ''
 		){
-			
 			$this->__set('MezzoTrasporto', (string) $xmldata->MezzoTrasporto);
 		}
 		
@@ -446,7 +433,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->CausaleTrasporto instanceof SimpleXMLElement
 			&& (string) $xmldata->CausaleTrasporto != ''
 		){
-			
 			$this->__set('CausaleTrasporto', (string) $xmldata->CausaleTrasporto);
 		}
 		
@@ -455,7 +441,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->NumeroColli instanceof SimpleXMLElement
 			&& (string) $xmldata->NumeroColli != ''
 		){
-			
 			$this->__set('NumeroColli', (string) $xmldata->NumeroColli);
 		}
 		
@@ -464,7 +449,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->Descrizione instanceof SimpleXMLElement
 			&& (string) $xmldata->Descrizione != ''
 		){
-			
 			$this->__set('Descrizione', (string) $xmldata->Descrizione);
 		}
 		
@@ -473,7 +457,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->UnitaMisuraPeso instanceof SimpleXMLElement
 			&& (string) $xmldata->UnitaMisuraPeso != ''
 		){
-			
 			$this->__set('UnitaMisuraPeso', (string) $xmldata->UnitaMisuraPeso);
 		}
 		
@@ -482,7 +465,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->PesoLordo instanceof SimpleXMLElement
 			&& (string) $xmldata->PesoLordo != ''
 		){
-			
 			$this->__set('PesoLordo', (string) $xmldata->PesoLordo);
 		}
 		
@@ -491,7 +473,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->DataOraRitiro instanceof SimpleXMLElement
 			&& (string) $xmldata->DataOraRitiro != ''
 		){
-			
 			$this->__set('DataOraRitiro', (string) $xmldata->DataOraRitiro);
 		}
 		
@@ -500,7 +481,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->DataInizioTrasporto instanceof SimpleXMLElement
 			&& (string) $xmldata->DataInizioTrasporto != ''
 		){
-			
 			$this->__set('DataInizioTrasporto', (string) $xmldata->DataInizioTrasporto);
 		}
 		
@@ -509,7 +489,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->TipoResa instanceof SimpleXMLElement
 			&& (string) $xmldata->TipoResa != ''
 		){
-			
 			$this->__set('TipoResa', (string) $xmldata->TipoResa);
 		}
 	
@@ -517,14 +496,13 @@ class DatiTrasporto extends Tag {
 		if(isset($xmldata->IndirizzoResa) 
 			&& $xmldata->IndirizzoResa instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->IndirizzoResa->count() == 1){
 				
 				$this->__IndirizzoResa = $this->IndirizzoResa
 					->loopXml($xmldata->IndirizzoResa);
 			} else{
 				
-				$this->err()->setErrors(_('Indirizzo Resa: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Indirizzo Resa: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -533,7 +511,6 @@ class DatiTrasporto extends Tag {
 			&& $xmldata->DataOraConsegna instanceof SimpleXMLElement
 			&& (string) $xmldata->DataOraConsegna != ''
 		){
-			
 			$this->__set('DataOraConsegna', (string) $xmldata->DataOraConsegna);
 		}
 		

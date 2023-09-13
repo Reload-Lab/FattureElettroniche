@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -110,7 +110,7 @@ class DatiGenerali extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Generali Documento: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Generali Documento: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Dati Ordine Acquisto
@@ -266,25 +266,23 @@ class DatiGenerali extends Tag {
 		if(isset($xmldata->DatiGeneraliDocumento) 
 			&& $xmldata->DatiGeneraliDocumento instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiGeneraliDocumento->count() == 1){
 				
 				$this->__DatiGeneraliDocumento = $this->DatiGeneraliDocumento
 					->loopXml($xmldata->DatiGeneraliDocumento);
 			} else{
 				
-				$this->err()->setErrors(_('Dati Generali Documento: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Generali Documento: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Generali Documento: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Generali Documento: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Dati Ordine Acquisto
 		if(isset($xmldata->DatiOrdineAcquisto)
 			&& $xmldata->DatiOrdineAcquisto instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiOrdineAcquisto->count(); $k++){
 				
 				$this->__DatiOrdineAcquisto[$k] = $this->DatiOrdineAcquisto[$k]
@@ -296,7 +294,6 @@ class DatiGenerali extends Tag {
 		if(isset($xmldata->DatiContratto)
 			&& $xmldata->DatiContratto instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiContratto->count(); $k++){
 				
 				$this->__DatiContratto[$k] = $this->DatiContratto[$k]
@@ -308,7 +305,6 @@ class DatiGenerali extends Tag {
 		if(isset($xmldata->DatiConvenzione)
 			&& $xmldata->DatiConvenzione instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiConvenzione->count(); $k++){
 				
 				$this->__DatiConvenzione[$k] = $this->DatiConvenzione[$k]
@@ -320,7 +316,6 @@ class DatiGenerali extends Tag {
 		if(isset($xmldata->DatiRicezione)
 			&& $xmldata->DatiRicezione instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiRicezione->count(); $k++){
 				
 				$this->__DatiRicezione[$k] = $this->DatiRicezione[$k]
@@ -332,7 +327,6 @@ class DatiGenerali extends Tag {
 		if(isset($xmldata->DatiFattureCollegate)
 			&& $xmldata->DatiFattureCollegate instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiFattureCollegate->count(); $k++){
 				
 				$this->__DatiFattureCollegate[$k] = $this->DatiFattureCollegate[$k]
@@ -344,14 +338,13 @@ class DatiGenerali extends Tag {
 		if(isset($xmldata->DatiSAL) 
 			&& $xmldata->DatiSAL instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiSAL->count() == 1){
 				
 				$this->__DatiSAL = $this->DatiSAL
 					->loopXml($xmldata->DatiSAL);
 			} else{
 				
-				$this->err()->setErrors(_('Dati SAL: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati SAL: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -359,7 +352,6 @@ class DatiGenerali extends Tag {
 		if(isset($xmldata->DatiDDT)
 			&& $xmldata->DatiDDT instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiDDT->count(); $k++){
 				
 				$this->__DatiDDT[$k] = $this->DatiDDT[$k]
@@ -371,14 +363,13 @@ class DatiGenerali extends Tag {
 		if(isset($xmldata->DatiTrasporto) 
 			&& $xmldata->DatiTrasporto instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiTrasporto->count() == 1){
 				
 				$this->__DatiTrasporto = $this->DatiTrasporto
 					->loopXml($xmldata->DatiTrasporto);
 			} else{
 				
-				$this->err()->setErrors(_('Dati Trasporto: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Trasporto: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -386,14 +377,13 @@ class DatiGenerali extends Tag {
 		if(isset($xmldata->FatturaPrincipale) 
 			&& $xmldata->FatturaPrincipale instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->FatturaPrincipale->count() == 1){
 				
 				$this->__FatturaPrincipale = $this->FatturaPrincipale
 					->loopXml($xmldata->FatturaPrincipale);
 			} else{
 				
-				$this->err()->setErrors(_('Fattura Principale: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Fattura Principale: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		

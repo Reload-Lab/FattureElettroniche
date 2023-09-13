@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -86,8 +86,7 @@ class DatiTrasmissione extends Tag {
 					if(!preg_match('/^[a-zA-Z0-9]+$/', $value) 
 						|| strlen($value) > 10
 					){
-						
-						$this->err()->setErrors(_('Progressivo Invio "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.$classname));
+						$this->err()->setErrors(_('Progressivo Invio "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -98,8 +97,7 @@ class DatiTrasmissione extends Tag {
 					if(!preg_match('/^[a-zA-Z0-9]+$/', $value) 
 						|| strlen($value) != 5
 					){
-						
-						$this->err()->setErrors(_('Formato Trasmissione "'.$value.'": Formato alfanumerico; lunghezza di 5 caratteri in '.$classname));
+						$this->err()->setErrors(_('Formato Trasmissione "'.$value.'": Formato alfanumerico; lunghezza di 5 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -110,8 +108,7 @@ class DatiTrasmissione extends Tag {
 					if(!preg_match('/^[a-zA-Z0-9]+$/', $value) 
 						|| strlen($value) != 7
 					){
-						
-						$this->err()->setErrors(_('Codice Destinatario "'.$value.'": Formato alfanumerico; lunghezza di 7 caratteri in '.$classname));
+						$this->err()->setErrors(_('Codice Destinatario "'.$value.'": Formato alfanumerico; lunghezza di 7 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -123,8 +120,7 @@ class DatiTrasmissione extends Tag {
 						|| strlen($value) < 7 
 						|| strlen($value) > 256
 					){
-						
-						$this->err()->setErrors(_('PEC Destinatario "'.$value.'": Formato alfanumerico; lunghezza che va da 7 a 256 caratteri in '.$classname));
+						$this->err()->setErrors(_('PEC Destinatario "'.$value.'": Formato alfanumerico; lunghezza che va da 7 a 256 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -161,7 +157,7 @@ class DatiTrasmissione extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Id Trasmittente: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Trasmittente: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Progressivo Invio
@@ -172,7 +168,7 @@ class DatiTrasmissione extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Progressivo Invio: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Progressivo Invio: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Formato Trasmissione
@@ -183,7 +179,7 @@ class DatiTrasmissione extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Formato Trasmissione: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Formato Trasmissione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Codice Destinatario
@@ -194,7 +190,7 @@ class DatiTrasmissione extends Tag {
 			$elem->appendChild($child);
 		} else{
 			
-			$this->err()->setErrors(_('Codice Destinatario: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Codice Destinatario: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Contatti Trasmittente
@@ -234,18 +230,17 @@ class DatiTrasmissione extends Tag {
 		if(isset($xmldata->IdTrasmittente) 
 			&& $xmldata->IdTrasmittente instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->IdTrasmittente->count() == 1){
 				
 				$this->__IdTrasmittente = $this->IdTrasmittente
 					->loopXml($xmldata->IdTrasmittente);
 			} else{
 				
-				$this->err()->setErrors(_('Id Trasmittente: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Id Trasmittente: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Id Trasmittente: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Trasmittente: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 
 		// Progressivo Invio
@@ -253,11 +248,10 @@ class DatiTrasmissione extends Tag {
 			&& $xmldata->ProgressivoInvio instanceof SimpleXMLElement
 			&& (string) $xmldata->ProgressivoInvio != ''
 		){
-			
 			$this->__set('ProgressivoInvio', (string) $xmldata->ProgressivoInvio);
 		} else{
 			
-			$this->err()->setErrors(_('Progressivo Invio: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Progressivo Invio: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Formato Trasmissione
@@ -265,11 +259,10 @@ class DatiTrasmissione extends Tag {
 			&& $xmldata->FormatoTrasmissione instanceof SimpleXMLElement
 			&& (string) $xmldata->FormatoTrasmissione != ''
 		){
-			
 			$this->__set('FormatoTrasmissione', (string) $xmldata->FormatoTrasmissione);
 		} else{
 			
-			$this->err()->setErrors(_('Formato Trasmissione: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Formato Trasmissione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Codice Destinatario
@@ -277,25 +270,23 @@ class DatiTrasmissione extends Tag {
 			&& $xmldata->CodiceDestinatario instanceof SimpleXMLElement
 			&& (string) $xmldata->CodiceDestinatario != ''
 		){
-			
 			$this->__set('CodiceDestinatario', (string) $xmldata->CodiceDestinatario);
 		} else{
 			
-			$this->err()->setErrors(_('Codice Destinatario: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Codice Destinatario: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Contatti Trasmittente
 		if(isset($xmldata->ContattiTrasmittente) 
 			&& $xmldata->ContattiTrasmittente instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->ContattiTrasmittente->count() == 1){
 				
 				$this->__ContattiTrasmittente = $this->ContattiTrasmittente
 					->loopXml($xmldata->ContattiTrasmittente);
 			} else{
 				
-				$this->err()->setErrors(_('Contatti Trasmittente: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Contatti Trasmittente: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 
@@ -304,7 +295,6 @@ class DatiTrasmissione extends Tag {
 			&& $xmldata->PECDestinatario instanceof SimpleXMLElement
 			&& (string) $xmldata->PECDestinatario != ''
 		){
-			
 			$this->__set('PECDestinatario', (string) $xmldata->PECDestinatario);
 		}
 		

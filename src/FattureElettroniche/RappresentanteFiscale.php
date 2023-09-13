@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -47,7 +47,7 @@ class RappresentanteFiscale extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $elem;
@@ -68,18 +68,17 @@ class RappresentanteFiscale extends Tag {
 		if(isset($xmldata->DatiAnagrafici) 
 			&& $xmldata->DatiAnagrafici instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiAnagrafici->count() == 1){
 				
 				$this->__DatiAnagrafici = $this->DatiAnagrafici
 					->loopXml($xmldata->DatiAnagrafici);
 			} else{
 				
-				$this->err()->setErrors(_('Dati Anagrafici: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Anagrafici: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

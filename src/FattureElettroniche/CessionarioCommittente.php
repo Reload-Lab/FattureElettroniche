@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -68,7 +68,7 @@ class CessionarioCommittente extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Sede
@@ -82,7 +82,7 @@ class CessionarioCommittente extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Sede: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Sede: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Stabile Organizzazione
@@ -125,50 +125,47 @@ class CessionarioCommittente extends Tag {
 		if(isset($xmldata->DatiAnagrafici) 
 			&& $xmldata->DatiAnagrafici instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->DatiAnagrafici->count() == 1){
 				
 				$this->__DatiAnagrafici = $this->DatiAnagrafici
 					->loopXml($xmldata->DatiAnagrafici, 'CessionarioCommittente');
 			} else{
 				
-				$this->err()->setErrors(_('Dati Anagrafici: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Dati Anagrafici: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Anagrafici: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 
 		// Sede
 		if(isset($xmldata->Sede) 
 			&& $xmldata->Sede instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->Sede->count() == 1){
 				
 				$this->__Sede = $this->Sede
 					->loopXml($xmldata->Sede);
 			} else{
 				
-				$this->err()->setErrors(_('Sede: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Sede: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Sede: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Sede: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Stabile Organizzazione
 		if(isset($xmldata->StabileOrganizzazione) 
 			&& $xmldata->StabileOrganizzazione instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->StabileOrganizzazione->count() == 1){
 				
 				$this->__StabileOrganizzazione = $this->StabileOrganizzazione
 					->loopXml($xmldata->StabileOrganizzazione);
 			} else{
 				
-				$this->err()->setErrors(_('Stabile Organizzazione: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Stabile Organizzazione: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -176,14 +173,13 @@ class CessionarioCommittente extends Tag {
 		if(isset($xmldata->RappresentanteFiscale) 
 			&& $xmldata->RappresentanteFiscale instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->RappresentanteFiscale->count() == 1){
 				
 				$this->__RappresentanteFiscaleCessionario = $this->RappresentanteFiscaleCessionario
 					->loopXml($xmldata->RappresentanteFiscale);
 			} else{
 				
-				$this->err()->setErrors(_('Rappresentante Fiscale: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Rappresentante Fiscale: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		

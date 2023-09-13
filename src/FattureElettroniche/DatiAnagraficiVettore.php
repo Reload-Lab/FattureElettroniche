@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -69,13 +69,12 @@ class DatiAnagraficiVettore extends Tag {
 					
 					$value = mb_strtoupper($value, 'UTF-8');
 					
-					if((!preg_match('/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i', $value) 
+					if((!preg_match('/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9A-Z]{3}[A-Z]$/i', $value) 
 						&& !preg_match('/^[0-9]{11}$/', $value))
 						|| strlen($value) < 11 
 						|| strlen($value) > 16
 					){
-						
-						$this->err()->setErrors(_('Codice Fiscale "'.$value.'": Formato alfanumerico; lunghezza compresa tra 11 e 16 caratteri in '.$classname));
+						$this->err()->setErrors(_('Codice Fiscale "'.$value.'": Formato alfanumerico; lunghezza compresa tra 11 e 16 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -86,8 +85,7 @@ class DatiAnagraficiVettore extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 20
 					){
-						
-						$this->err()->setErrors(_('Numero Licenza Guida "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.$classname));
+						$this->err()->setErrors(_('Numero Licenza Guida "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -124,7 +122,7 @@ class DatiAnagraficiVettore extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Codice Fiscale
@@ -146,7 +144,7 @@ class DatiAnagraficiVettore extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Anagrafica: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Anagrafica: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Numero Licenza Guida
@@ -175,18 +173,17 @@ class DatiAnagraficiVettore extends Tag {
 		if(isset($xmldata->IdFiscaleIVA) 
 			&& $xmldata->IdFiscaleIVA instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->IdFiscaleIVA->count() == 1){
 				
 				$this->__IdFiscaleIVA = $this->IdFiscaleIVA
 					->loopXml($xmldata->IdFiscaleIVA);
 			} else{
 				
-				$this->err()->setErrors(_('Id Fiscale IVA: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Id Fiscale IVA: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Codice Fiscale
@@ -194,7 +191,6 @@ class DatiAnagraficiVettore extends Tag {
 			&& $xmldata->CodiceFiscale instanceof SimpleXMLElement
 			&& (string) $xmldata->CodiceFiscale != ''
 		){
-			
 			$this->__set('CodiceFiscale', (string) $xmldata->CodiceFiscale);
 		}
 	
@@ -202,18 +198,17 @@ class DatiAnagraficiVettore extends Tag {
 		if(isset($xmldata->Anagrafica) 
 			&& $xmldata->Anagrafica instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->Anagrafica->count() == 1){
 				
 				$this->__Anagrafica = $this->Anagrafica
 					->loopXml($xmldata->Anagrafica);
 			} else{
 				
-				$this->err()->setErrors(_('Anagrafica: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Anagrafica: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Anagrafica: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Anagrafica: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Numero Licenza Guida
@@ -221,7 +216,6 @@ class DatiAnagraficiVettore extends Tag {
 			&& $xmldata->NumeroLicenzaGuida instanceof SimpleXMLElement
 			&& (string) $xmldata->NumeroLicenzaGuida != ''
 		){
-			
 			$this->__set('NumeroLicenzaGuida', (string) $xmldata->NumeroLicenzaGuida);
 		}
 		

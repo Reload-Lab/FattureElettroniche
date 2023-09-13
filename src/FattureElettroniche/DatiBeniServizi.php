@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -59,11 +59,11 @@ class DatiBeniServizi extends Tag {
 				}
 			} else{
 				
-				$this->err()->setErrors(_('Dettaglio Linee: Il tipo complesso è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Dettaglio Linee: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dettaglio Linee: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dettaglio Linee: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Dati Riepilogo
@@ -82,11 +82,11 @@ class DatiBeniServizi extends Tag {
 				}
 			} else{
 				
-				$this->err()->setErrors(_('Dati Riepilogo: Il tipo complesso è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Dati Riepilogo: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Riepilogo: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Riepilogo: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $elem;
@@ -107,7 +107,6 @@ class DatiBeniServizi extends Tag {
 		if(isset($xmldata->DettaglioLinee)
 			&& $xmldata->DettaglioLinee instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DettaglioLinee->count(); $k++){
 
 				$this->__DettaglioLinee[$k] = $this->DettaglioLinee[$k]
@@ -115,14 +114,13 @@ class DatiBeniServizi extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dettaglio Linee: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dettaglio Linee: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Dati Riepilogo
 		if(isset($xmldata->DatiRiepilogo)
 			&& $xmldata->DatiRiepilogo instanceof SimpleXMLElement
 		){
-			
 			for($k = 0; $k < $xmldata->DatiRiepilogo->count(); $k++){
 				
 				$this->__DatiRiepilogo[$k] = $this->DatiRiepilogo[$k]
@@ -130,7 +128,7 @@ class DatiBeniServizi extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Dati Riepilogo: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Dati Riepilogo: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

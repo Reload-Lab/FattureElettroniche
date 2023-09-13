@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -15,10 +15,14 @@ use \ReflectionProperty;
 use \SimpleXMLElement;
 use \DOMNode;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class DatiDDT extends Tag implements ArrayAccess {
+class DatiDDT extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -74,8 +78,7 @@ class DatiDDT extends Tag implements ArrayAccess {
 						&& !is_numeric($value))
 						|| strlen($value) > 20
 					){
-						
-						$this->err()->setErrors(_('Numero DDT "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.$classname));
+						$this->err()->setErrors(_('Numero DDT "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -86,8 +89,7 @@ class DatiDDT extends Tag implements ArrayAccess {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data DDT "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data DDT "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -127,7 +129,7 @@ class DatiDDT extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Numero DDT: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Numero DDT: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Data DDT
@@ -138,7 +140,7 @@ class DatiDDT extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Data DDT: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Data DDT: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Riferimento Numero Linea
@@ -181,11 +183,10 @@ class DatiDDT extends Tag implements ArrayAccess {
 			&& $xmldata->NumeroDDT instanceof SimpleXMLElement
 			&& (string) $xmldata->NumeroDDT != ''
 		){
-			
 			$this->__set('NumeroDDT', (string) $xmldata->NumeroDDT);
 		} else{
 			
-			$this->err()->setErrors(_('Numero DDT: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Numero DDT: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Data DDT
@@ -193,18 +194,16 @@ class DatiDDT extends Tag implements ArrayAccess {
 			&& $xmldata->DataDDT instanceof SimpleXMLElement
 			&& (string) $xmldata->DataDDT != ''
 		){
-			
 			$this->__set('DataDDT', (string) $xmldata->DataDDT);
 		} else{
 			
-			$this->err()->setErrors(_('Data DDT: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Data DDT: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Riferimento Numero Linea
 		if(isset($xmldata->RiferimentoNumeroLinea)
 			&& $xmldata->RiferimentoNumeroLinea instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->RiferimentoNumeroLinea->count() > 1){
 				
 				for($k = 0; $k < $xmldata->RiferimentoNumeroLinea->count(); $k++){

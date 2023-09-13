@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -14,10 +14,14 @@ use \ReflectionClass;
 use \ReflectionProperty;
 use \SimpleXMLElement;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class Allegati extends Tag implements ArrayAccess {
+class Allegati extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -89,8 +93,7 @@ class Allegati extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-					
-						$this->err()->setErrors(_('Nome Attachment "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Nome Attachment "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -101,8 +104,7 @@ class Allegati extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 10
 					){
-						
-						$this->err()->setErrors(_('Algoritmo Compressione "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.$classname));
+						$this->err()->setErrors(_('Algoritmo Compressione "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -113,8 +115,7 @@ class Allegati extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 10
 					){
-						
-						$this->err()->setErrors(_('Formato Attachment "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.$classname));
+						$this->err()->setErrors(_('Formato Attachment "'.$value.'": Formato alfanumerico; lunghezza massima di 10 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -125,8 +126,7 @@ class Allegati extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 100
 					){
-						
-						$this->err()->setErrors(_('Descrizione Attachment "'.$value.'": Formato alfanumerico; lunghezza massima di 100 caratteri in '.$classname));
+						$this->err()->setErrors(_('Descrizione Attachment "'.$value.'": Formato alfanumerico; lunghezza massima di 100 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -134,9 +134,9 @@ class Allegati extends Tag implements ArrayAccess {
 				// Attachment
 				if($name == 'Attachment'){
 					
-					if(!is_string($value)){
+					if(!base64_decode($value, true)){
 						
-						$this->err()->setErrors(_('Attachment "'.$value.'": Formato xs:base64Binary in '.$classname));
+						$this->err()->setErrors(_('Attachment "'.$value.'": Formato xs:base64Binary in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -176,7 +176,7 @@ class Allegati extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Nome Attachment: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Nome Attachment: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Algoritmo Compressione
@@ -211,7 +211,7 @@ class Allegati extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Attachment: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Attachment: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				array_push($arr, $elem);
@@ -237,11 +237,10 @@ class Allegati extends Tag implements ArrayAccess {
 			&& $xmldata->NomeAttachment instanceof SimpleXMLElement
 			&& (string) $xmldata->NomeAttachment != ''
 		){
-			
 			$this->__set('NomeAttachment', (string) $xmldata->NomeAttachment);
 		} else{
 			
-			$this->err()->setErrors(_('Nome Attachment: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Nome Attachment: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Algoritmo Compressione
@@ -249,7 +248,6 @@ class Allegati extends Tag implements ArrayAccess {
 			&& $xmldata->AlgoritmoCompressione instanceof SimpleXMLElement
 			&& (string) $xmldata->AlgoritmoCompressione != ''
 		){
-			
 			$this->__set('AlgoritmoCompressione', (string) $xmldata->AlgoritmoCompressione);
 		}
 		
@@ -258,7 +256,6 @@ class Allegati extends Tag implements ArrayAccess {
 			&& $xmldata->FormatoAttachment instanceof SimpleXMLElement
 			&& (string) $xmldata->FormatoAttachment != ''
 		){
-			
 			$this->__set('FormatoAttachment', (string) $xmldata->FormatoAttachment);
 		}
 		
@@ -267,7 +264,6 @@ class Allegati extends Tag implements ArrayAccess {
 			&& $xmldata->DescrizioneAttachment instanceof SimpleXMLElement
 			&& (string) $xmldata->DescrizioneAttachment != ''
 		){
-			
 			$this->__set('DescrizioneAttachment', (string) $xmldata->DescrizioneAttachment);
 		}
 		
@@ -276,11 +272,10 @@ class Allegati extends Tag implements ArrayAccess {
 			&& $xmldata->Attachment instanceof SimpleXMLElement
 			&& (string) $xmldata->Attachment != ''
 		){
-			
 			$this->__set('Attachment', (string) $xmldata->Attachment);
 		} else{
 			
-			$this->err()->setErrors(_('Attachment: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Attachment: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		return $this;

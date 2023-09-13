@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -70,8 +70,7 @@ class RappresentanteFiscaleCessionario extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 80
 					){
-						
-						$this->err()->setErrors(_('Denominazione "'.$value.'": Formato alfanumerico; lunghezza massima di 80 caratteri in '.$classname));
+						$this->err()->setErrors(_('Denominazione "'.$value.'": Formato alfanumerico; lunghezza massima di 80 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -82,8 +81,7 @@ class RappresentanteFiscaleCessionario extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Nome "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Nome "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -94,8 +92,7 @@ class RappresentanteFiscaleCessionario extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Cognome "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Cognome "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -132,7 +129,7 @@ class RappresentanteFiscaleCessionario extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			return;
 		}
 		
@@ -162,7 +159,7 @@ class RappresentanteFiscaleCessionario extends Tag {
 				$elem->appendChild($child);
 			} else{
 				
-				$this->err()->setErrors(_('Denominazione: Il tipo è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Denominazione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				return;
 			}
 		}
@@ -185,18 +182,17 @@ class RappresentanteFiscaleCessionario extends Tag {
 		if(isset($xmldata->IdFiscaleIVA) 
 			&& $xmldata->IdFiscaleIVA instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->IdFiscaleIVA->count() == 1){
 				
 				$this->__IdFiscaleIVA = $this->IdFiscaleIVA
 					->loopXml($xmldata->IdFiscaleIVA);
 			} else{
 				
-				$this->err()->setErrors(_('Id Fiscale IVA: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Id Fiscale IVA: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Nome
@@ -207,7 +203,6 @@ class RappresentanteFiscaleCessionario extends Tag {
 			&& $xmldata->Cognome instanceof SimpleXMLElement
 			&& (string) $xmldata->Cognome != ''
 		){
-			
 			$this->__set('Nome', (string) $xmldata->Nome);
 		}
 		
@@ -219,7 +214,6 @@ class RappresentanteFiscaleCessionario extends Tag {
 			&& $xmldata->Cognome instanceof SimpleXMLElement
 			&& (string) $xmldata->Cognome != ''
 		){
-			
 			$this->__set('Cognome', (string) $xmldata->Cognome);
 		}
 		
@@ -230,17 +224,15 @@ class RappresentanteFiscaleCessionario extends Tag {
 			|| !($xmldata->Cognome instanceof SimpleXMLElement)
 			|| (string) $xmldata->Cognome == ''
 		){
-		
 			// Denominazione
 			if(isset($xmldata->Denominazione) 
 				&& $xmldata->Denominazione instanceof SimpleXMLElement
 				&& (string) $xmldata->Denominazione != ''
 			){
-				
 				$this->__set('Denominazione', (string) $xmldata->Denominazione);
 			} else{
 				
-				$this->err()->setErrors(_('Denominazione: Il tipo è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Denominazione: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		

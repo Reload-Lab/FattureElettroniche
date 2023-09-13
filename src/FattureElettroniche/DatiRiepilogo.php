@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -14,10 +14,14 @@ use \ReflectionClass;
 use \ReflectionProperty;
 use \SimpleXMLElement;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class DatiRiepilogo extends Tag implements ArrayAccess {
+class DatiRiepilogo extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -114,8 +118,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 6
 					){
-						
-						$this->err()->setErrors(_('Aliquota IVA "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.$classname));
+						$this->err()->setErrors(_('Aliquota IVA "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 6 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -127,7 +130,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$NT[$value])){
 						
-						$this->err()->setErrors(_('Natura "'.$value.'": Formato alfanumerico; lunghezza da 2 a 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Natura "'.$value.'": Formato alfanumerico; lunghezza da 2 a 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -139,8 +142,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Spese Accessorie "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Spese Accessorie "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -148,12 +150,11 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 				// Arrotondamento
 				if($name == 'Arrotondamento'){
 					
-					if(!preg_match('/^(?=.)(([0-9]+)(\.([0-9]+))?)$/', $value) 
+					if(!preg_match('/^[+-]?(?=.)(([0-9]+)(\.([0-9]+))?)$/', $value) 
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Arrotondamento "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Arrotondamento "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -165,8 +166,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Imponibile Importo "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Imponibile Importo "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -178,8 +178,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Imposta "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Imposta "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -191,7 +190,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$EI[$value])){
 						
-						$this->err()->setErrors(_('Esigibilita IVA "'.$value.'": Formato alfanumerico; lunghezza di 1 carattere in '.$classname));
+						$this->err()->setErrors(_('Esigibilita IVA "'.$value.'": Formato alfanumerico; lunghezza di 1 carattere in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -202,8 +201,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 100
 					){
-						
-						$this->err()->setErrors(_('Riferimento Normativo "'.$value.'": Formato alfanumerico; lunghezza massima di 100 caratteri in '.$classname));
+						$this->err()->setErrors(_('Riferimento Normativo "'.$value.'": Formato alfanumerico; lunghezza massima di 100 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -243,7 +241,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Natura
@@ -278,7 +276,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Imponibile Importo: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Imponibile Importo: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Imposta
@@ -289,7 +287,7 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Imposta: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Imposta: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Esigibilita IVA
@@ -331,11 +329,10 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 			&& $xmldata->AliquotaIVA instanceof SimpleXMLElement
 			&& (string) $xmldata->AliquotaIVA != ''
 		){
-			
 			$this->__set('AliquotaIVA', (string) $xmldata->AliquotaIVA);
 		} else{
 			
-			$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Aliquota IVA: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Natura
@@ -343,7 +340,6 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 			&& $xmldata->Natura instanceof SimpleXMLElement
 			&& (string) $xmldata->Natura != ''
 		){
-			
 			$this->__set('Natura', (string) $xmldata->Natura);
 		}
 		
@@ -352,7 +348,6 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 			&& $xmldata->SpeseAccessorie instanceof SimpleXMLElement
 			&& (string) $xmldata->SpeseAccessorie != ''
 		){
-			
 			$this->__set('SpeseAccessorie', (string) $xmldata->SpeseAccessorie);
 		}
 		
@@ -361,7 +356,6 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 			&& $xmldata->Arrotondamento instanceof SimpleXMLElement
 			&& (string) $xmldata->Arrotondamento != ''
 		){
-			
 			$this->__set('Arrotondamento', (string) $xmldata->Arrotondamento);
 		}
 		
@@ -370,11 +364,10 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 			&& $xmldata->ImponibileImporto instanceof SimpleXMLElement
 			&& (string) $xmldata->ImponibileImporto != ''
 		){
-			
 			$this->__set('ImponibileImporto', (string) $xmldata->ImponibileImporto);
 		} else{
 			
-			$this->err()->setErrors(_('Imponibile Importo: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Imponibile Importo: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Imposta
@@ -382,11 +375,10 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 			&& $xmldata->Imposta instanceof SimpleXMLElement
 			&& (string) $xmldata->Imposta != ''
 		){
-			
 			$this->__set('Imposta', (string) $xmldata->Imposta);
 		} else{
 			
-			$this->err()->setErrors(_('Imposta: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Imposta: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Esigibilita IVA
@@ -394,7 +386,6 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 			&& $xmldata->EsigibilitaIVA instanceof SimpleXMLElement
 			&& (string) $xmldata->EsigibilitaIVA != ''
 		){
-			
 			$this->__set('EsigibilitaIVA', (string) $xmldata->EsigibilitaIVA);
 		}
 		
@@ -403,7 +394,6 @@ class DatiRiepilogo extends Tag implements ArrayAccess {
 			&& $xmldata->RiferimentoNormativo instanceof SimpleXMLElement
 			&& (string) $xmldata->RiferimentoNormativo != ''
 		){
-			
 			$this->__set('RiferimentoNormativo', (string) $xmldata->RiferimentoNormativo);
 		}
 		

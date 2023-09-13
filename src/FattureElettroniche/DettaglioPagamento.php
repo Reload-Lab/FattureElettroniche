@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -14,10 +14,14 @@ use \ReflectionClass;
 use \ReflectionProperty;
 use \SimpleXMLElement;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class DettaglioPagamento extends Tag implements ArrayAccess {
+class DettaglioPagamento extends Tag implements ArrayAccess, Iterator, Countable {
 	
 	use OffsetArray;
+	use IteratorArray;
+	use CountArray;
 	
 	/**
 	 * Instances
@@ -217,8 +221,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 200
 					){
-						
-						$this->err()->setErrors(_('Beneficiario "'.$value.'": Formato alfanumerico; lunghezza massima di 200 caratteri in '.$classname));
+						$this->err()->setErrors(_('Beneficiario "'.$value.'": Formato alfanumerico; lunghezza massima di 200 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -230,7 +233,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					
 					if(!isset(Costant::$MP[$value])){
 						
-						$this->err()->setErrors(_('Modalita Pagamento "'.$value.'": Formato alfanumerico; lunghezza da 2 a 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('Modalita Pagamento "'.$value.'": Formato alfanumerico; lunghezza da 2 a 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -241,8 +244,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data Riferimento Termini Pagamento "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data Riferimento Termini Pagamento "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -253,8 +255,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!preg_match('/^\d+$/', $value) 
 						|| strlen($value) > 3
 					){
-						
-						$this->err()->setErrors(_('Giorni Termini Pagamento "'.$value.'": Formato numerico; lunghezza massima di 3 caratteri in '.$classname));
+						$this->err()->setErrors(_('Giorni Termini Pagamento "'.$value.'": Formato numerico; lunghezza massima di 3 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -265,8 +266,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data Scadenza Pagamento "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data Scadenza Pagamento "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -278,8 +278,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Importo Pagamento "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Importo Pagamento "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -290,8 +289,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 20
 					){
-						
-						$this->err()->setErrors(_('Codice Ufficio Postale "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.$classname));
+						$this->err()->setErrors(_('Codice Ufficio Postale "'.$value.'": Formato alfanumerico; lunghezza massima di 20 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -302,8 +300,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Cognome Quietanzante "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Cognome Quietanzante "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -314,8 +311,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Nome Quietanzante "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Nome Quietanzante "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -323,11 +319,10 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 				// CF Quietanzante
 				if($name == 'CFQuietanzante'){
 					
-					if(!preg_match('/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i', $value) 
+					if(!preg_match('/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9A-Z]{3}[A-Z]$/i', $value) 
 						|| strlen($value) > 16
 					){
-						
-						$this->err()->setErrors(_('CF Quietanzante "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('CF Quietanzante "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -339,8 +334,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 						|| strlen($value) < 2 
 						|| strlen($value) > 10
 					){
-						
-						$this->err()->setErrors(_('Titolo Quietanzante "'.$value.'": Formato alfanumerico; lunghezza che va da 2 a 10 caratteri in '.$classname));
+						$this->err()->setErrors(_('Titolo Quietanzante "'.$value.'": Formato alfanumerico; lunghezza che va da 2 a 10 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -351,8 +345,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 80
 					){
-						
-						$this->err()->setErrors(_('Istituto Finanziario "'.$value.'": Formato alfanumerico; lunghezza massima di 80 caratteri in '.$classname));
+						$this->err()->setErrors(_('Istituto Finanziario "'.$value.'": Formato alfanumerico; lunghezza massima di 80 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -364,8 +357,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 						|| strlen($value) < 15 
 						|| strlen($value) > 34
 					){
-						
-						$this->err()->setErrors(_('IBAN "'.$value.'": Formato alfanumerico; lunghezza che va da 2 a 10 caratteri in '.$classname));
+						$this->err()->setErrors(_('IBAN "'.$value.'": Formato alfanumerico; lunghezza che va da 2 a 10 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -376,8 +368,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!preg_match('/^[0-9]+$/', $value) 
 						|| strlen($value) != 5
 					){
-						
-						$this->err()->setErrors(_('ABI "'.$value.'": Formato numerico; lunghezza di 5 caratteri in '.$classname));
+						$this->err()->setErrors(_('ABI "'.$value.'": Formato numerico; lunghezza di 5 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -388,8 +379,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!preg_match('/^[0-9]+$/', $value) 
 						|| strlen($value) != 5
 					){
-						
-						$this->err()->setErrors(_('CAB "'.$value.'": Formato numerico; lunghezza di 5 caratteri in '.$classname));
+						$this->err()->setErrors(_('CAB "'.$value.'": Formato numerico; lunghezza di 5 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -403,8 +393,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 						|| strlen($value) < 8 
 						|| strlen($value) > 11
 					){
-						
-						$this->err()->setErrors(_('BIC "'.$value.'": Formato alfanumerico; lunghezza che va da 8 a 11 caratteri in '.$classname));
+						$this->err()->setErrors(_('BIC "'.$value.'": Formato alfanumerico; lunghezza che va da 8 a 11 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -416,8 +405,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Sconto Pagamento Anticipato "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Sconto Pagamento Anticipato "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -428,8 +416,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data Limite Pagamento Anticipato "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data Limite Pagamento Anticipato "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -441,8 +428,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 						|| strlen($value) < 4 
 						|| strlen($value) > 15
 					){
-						
-						$this->err()->setErrors(_('Penalita Pagamenti Ritardati "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.$classname));
+						$this->err()->setErrors(_('Penalita Pagamenti Ritardati "'.$value.'": Formato numerico nel quale i decimali vanno separati dall\'intero con il carattere \'.\' (punto). La sua lunghezza va da 4 a 15 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -453,8 +439,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('Data Decorrenza Penale "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('Data Decorrenza Penale "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -465,8 +450,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Codice Pagamento "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Codice Pagamento "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -514,7 +498,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Modalita Pagamento: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Modalita Pagamento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Data Riferimento Termini Pagamento
@@ -549,7 +533,7 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 					$elem->appendChild($child);
 				} else{
 					
-					$this->err()->setErrors(_('Importo Pagamento: Il tipo è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Importo Pagamento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 				
 				// Codice Ufficio Postale
@@ -695,7 +679,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->Beneficiario instanceof SimpleXMLElement
 			&& (string) $xmldata->Beneficiario != ''
 		){
-			
 			$this->__set('Beneficiario', (string) $xmldata->Beneficiario);
 		}
 		
@@ -704,11 +687,10 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->ModalitaPagamento instanceof SimpleXMLElement
 			&& (string) $xmldata->ModalitaPagamento != ''
 		){
-			
 			$this->__set('ModalitaPagamento', (string) $xmldata->ModalitaPagamento);
 		} else{
 			
-			$this->err()->setErrors(_('Modalita Pagamento: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Modalita Pagamento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Data Riferimento Termini Pagamento
@@ -716,7 +698,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->DataRiferimentoTerminiPagamento instanceof SimpleXMLElement
 			&& (string) $xmldata->DataRiferimentoTerminiPagamento != ''
 		){
-			
 			$this->__set('DataRiferimentoTerminiPagamento', (string) $xmldata->DataRiferimentoTerminiPagamento);
 		}
 		
@@ -725,7 +706,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->GiorniTerminiPagamento instanceof SimpleXMLElement
 			&& (string) $xmldata->GiorniTerminiPagamento != ''
 		){
-			
 			$this->__set('GiorniTerminiPagamento', (string) $xmldata->GiorniTerminiPagamento);
 		}
 		
@@ -734,7 +714,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->DataScadenzaPagamento instanceof SimpleXMLElement
 			&& (string) $xmldata->DataScadenzaPagamento != ''
 		){
-			
 			$this->__set('DataScadenzaPagamento', (string) $xmldata->DataScadenzaPagamento);
 		}
 		
@@ -743,11 +722,10 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->ImportoPagamento instanceof SimpleXMLElement
 			&& (string) $xmldata->ImportoPagamento != ''
 		){
-			
 			$this->__set('ImportoPagamento', (string) $xmldata->ImportoPagamento);
 		} else{
 			
-			$this->err()->setErrors(_('Importo Pagamento: Il tipo è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Importo Pagamento: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		// Codice Ufficio Postale
@@ -755,7 +733,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->CodUfficioPostale instanceof SimpleXMLElement
 			&& (string) $xmldata->CodUfficioPostale != ''
 		){
-			
 			$this->__set('CodUfficioPostale', (string) $xmldata->CodUfficioPostale);
 		}
 		
@@ -764,7 +741,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->CognomeQuietanzante instanceof SimpleXMLElement
 			&& (string) $xmldata->CognomeQuietanzante != ''
 		){
-			
 			$this->__set('CognomeQuietanzante', (string) $xmldata->CognomeQuietanzante);
 		}
 		
@@ -773,7 +749,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->NomeQuietanzante instanceof SimpleXMLElement
 			&& (string) $xmldata->NomeQuietanzante != ''
 		){
-			
 			$this->__set('NomeQuietanzante', (string) $xmldata->NomeQuietanzante);
 		}
 		
@@ -782,7 +757,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->CFQuietanzante instanceof SimpleXMLElement
 			&& (string) $xmldata->CFQuietanzante != ''
 		){
-			
 			$this->__set('CFQuietanzante', (string) $xmldata->CFQuietanzante);
 		}
 		
@@ -791,7 +765,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->TitoloQuietanzante instanceof SimpleXMLElement
 			&& (string) $xmldata->TitoloQuietanzante != ''
 		){
-			
 			$this->__set('TitoloQuietanzante', (string) $xmldata->TitoloQuietanzante);
 		}
 		
@@ -800,7 +773,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->IstitutoFinanziario instanceof SimpleXMLElement
 			&& (string) $xmldata->IstitutoFinanziario != ''
 		){
-			
 			$this->__set('IstitutoFinanziario', (string) $xmldata->IstitutoFinanziario);
 		}
 		
@@ -809,7 +781,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->IBAN instanceof SimpleXMLElement
 			&& (string) $xmldata->IBAN != ''
 		){
-			
 			$this->__set('IBAN', (string) $xmldata->IBAN);
 		}
 		
@@ -818,7 +789,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->ABI instanceof SimpleXMLElement
 			&& (string) $xmldata->ABI != ''
 		){
-			
 			$this->__set('ABI', (string) $xmldata->ABI);
 		}
 		
@@ -827,7 +797,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->CAB instanceof SimpleXMLElement
 			&& (string) $xmldata->CAB != ''
 		){
-			
 			$this->__set('CAB', (string) $xmldata->CAB);
 		}
 		
@@ -836,7 +805,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->BIC instanceof SimpleXMLElement
 			&& (string) $xmldata->BIC != ''
 		){
-			
 			$this->__set('BIC', (string) $xmldata->BIC);
 		}
 		
@@ -845,7 +813,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->ScontoPagamentoAnticipato instanceof SimpleXMLElement
 			&& (string) $xmldata->ScontoPagamentoAnticipato != ''
 		){
-			
 			$this->__set('ScontoPagamentoAnticipato', (string) $xmldata->ScontoPagamentoAnticipato);
 		}
 		
@@ -854,7 +821,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->DataLimitePagamentoAnticipato instanceof SimpleXMLElement
 			&& (string) $xmldata->DataLimitePagamentoAnticipato != ''
 		){
-			
 			$this->__set('DataLimitePagamentoAnticipato', (string) $xmldata->DataLimitePagamentoAnticipato);
 		}
 		
@@ -863,7 +829,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->PenalitaPagamentiRitardati instanceof SimpleXMLElement
 			&& (string) $xmldata->PenalitaPagamentiRitardati != ''
 		){
-			
 			$this->__set('PenalitaPagamentiRitardati', (string) $xmldata->PenalitaPagamentiRitardati);
 		}
 		
@@ -872,7 +837,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->DataDecorrenzaPenale instanceof SimpleXMLElement
 			&& (string) $xmldata->DataDecorrenzaPenale != ''
 		){
-			
 			$this->__set('DataDecorrenzaPenale', (string) $xmldata->DataDecorrenzaPenale);
 		}
 		
@@ -881,7 +845,6 @@ class DettaglioPagamento extends Tag implements ArrayAccess {
 			&& $xmldata->CodicePagamento instanceof SimpleXMLElement
 			&& (string) $xmldata->CodicePagamento != ''
 		){
-			
 			$this->__set('CodicePagamento', (string) $xmldata->CodicePagamento);
 		}
 		

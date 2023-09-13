@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -101,13 +101,12 @@ class DatiAnagrafici extends Tag {
 					
 					$value = mb_strtoupper($value, 'UTF-8');
 					
-					if((!preg_match('/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i', $value) 
+					if((!preg_match('/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9A-Z]{3}[A-Z]$/i', $value) 
 						&& !preg_match('/^[0-9]{11}$/', $value))
 						|| strlen($value) < 11 
 						|| strlen($value) > 16
 					){
-						
-						$this->err()->setErrors(_('Codice Fiscale "'.$value.'": Formato alfanumerico; lunghezza compresa tra 11 e 16 caratteri in '.$classname));
+						$this->err()->setErrors(_('Codice Fiscale "'.$value.'": Formato alfanumerico; lunghezza compresa tra 11 e 16 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -118,8 +117,7 @@ class DatiAnagrafici extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('Albo Professionale "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('Albo Professionale "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -131,7 +129,7 @@ class DatiAnagrafici extends Tag {
 					
 					if(!isset(Costant::$PI[$value])){
 						
-						$this->err()->setErrors(_('Provincia Albo "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.$classname));
+						$this->err()->setErrors(_('Provincia Albo "'.$value.'": Formato alfanumerico; lunghezza di 2 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -142,8 +140,7 @@ class DatiAnagrafici extends Tag {
 					if(!is_string($value) 
 						|| strlen($value) > 60
 					){
-						
-						$this->err()->setErrors(_('NumeroIscrizione Albo "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.$classname));
+						$this->err()->setErrors(_('NumeroIscrizione Albo "'.$value.'": Formato alfanumerico; lunghezza massima di 60 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -154,8 +151,7 @@ class DatiAnagrafici extends Tag {
 					if(!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $value) 
 						|| strlen($value) != 10
 					){
-						
-						$this->err()->setErrors(_('DataIscrizioneAlbo "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.$classname));
+						$this->err()->setErrors(_('DataIscrizioneAlbo "'.$value.'": La data deve essere rappresentata secondo il formato ISO 8601:2004, con la seguente precisione: YYYY-MM-DD in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -167,7 +163,7 @@ class DatiAnagrafici extends Tag {
 					
 					if(!isset(Costant::$RF[$value])){
 						
-						$this->err()->setErrors(_('RegimeFiscale "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.$classname));
+						$this->err()->setErrors(_('RegimeFiscale "'.$value.'": Formato alfanumerico; lunghezza di 4 caratteri in '.__FILE__.' on line '.__LINE__));
 						return;
 					}
 				}
@@ -216,7 +212,7 @@ class DatiAnagrafici extends Tag {
 					}
 				} else{
 				
-					$this->err()->setErrors(_('IdFiscaleIVA: Il tipo complesso è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('IdFiscaleIVA: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 			}
 		} else{
@@ -232,7 +228,7 @@ class DatiAnagrafici extends Tag {
 				}
 			} else{
 				
-				$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 			
 			// Codice Fiscale
@@ -255,7 +251,7 @@ class DatiAnagrafici extends Tag {
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Anagrafica: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Anagrafica: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		if($parent == 'CedentePrestatore'){
@@ -300,7 +296,7 @@ class DatiAnagrafici extends Tag {
 				$elem->appendChild($child);
 			} else{
 			
-				$this->err()->setErrors(_('Regime Fiscale: Il tipo è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Regime Fiscale: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 		
@@ -325,7 +321,6 @@ class DatiAnagrafici extends Tag {
 				&& $xmldata->CodiceFiscale instanceof SimpleXMLElement
 				&& (string) $xmldata->CodiceFiscale != ''
 			){
-				
 				$this->__set('CodiceFiscale', (string) $xmldata->CodiceFiscale);
 			} else{
 
@@ -333,18 +328,17 @@ class DatiAnagrafici extends Tag {
 				if(isset($xmldata->IdFiscaleIVA) 
 					&& $xmldata->IdFiscaleIVA instanceof SimpleXMLElement
 				){
-					
 					if($xmldata->IdFiscaleIVA->count() == 1){
 						
 						$this->__IdFiscaleIVA = $this->IdFiscaleIVA
 							->loopXml($xmldata->IdFiscaleIVA);
 					} else{
 						
-						$this->err()->setErrors(_('Id Fiscale IVA: Il nodo deve essere presente una sola volta in '.$classname));
+						$this->err()->setErrors(_('Id Fiscale IVA: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 					}
 				} else{
 					
-					$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.$classname));
+					$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 				}
 			}
 		} else{
@@ -353,18 +347,17 @@ class DatiAnagrafici extends Tag {
 			if(isset($xmldata->IdFiscaleIVA) 
 				&& $xmldata->IdFiscaleIVA instanceof SimpleXMLElement
 			){
-				
 				if($xmldata->IdFiscaleIVA->count() == 1){
 					
 					$this->__IdFiscaleIVA = $this->IdFiscaleIVA
 						->loopXml($xmldata->IdFiscaleIVA);
 				} else{
 					
-					$this->err()->setErrors(_('IdFiscale IVA: Il nodo deve essere presente una sola volta in '.$classname));
+					$this->err()->setErrors(_('IdFiscale IVA: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 				}
 			} else{
 				
-				$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Id Fiscale IVA: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 	
 			// Codice Fiscale
@@ -372,7 +365,6 @@ class DatiAnagrafici extends Tag {
 				&& $xmldata->CodiceFiscale instanceof SimpleXMLElement
 				&& (string) $xmldata->CodiceFiscale != ''
 			){
-				
 				$this->__set('CodiceFiscale', (string) $xmldata->CodiceFiscale);
 			}
 		}
@@ -381,18 +373,17 @@ class DatiAnagrafici extends Tag {
 		if(isset($xmldata->Anagrafica) 
 			&& $xmldata->Anagrafica instanceof SimpleXMLElement
 		){
-			
 			if($xmldata->Anagrafica->count() == 1){
 				
 				$this->__Anagrafica = $this->Anagrafica
 					->loopXml($xmldata->Anagrafica);
 			} else{
 				
-				$this->err()->setErrors(_('Anagrafica: Il nodo deve essere presente una sola volta in '.$classname));
+				$this->err()->setErrors(_('Anagrafica: Il nodo deve essere presente una sola volta in '.__FILE__.' on line '.__LINE__));
 			}
 		} else{
 			
-			$this->err()->setErrors(_('Anagrafica: Il tipo complesso è obbligatorio in '.$classname));
+			$this->err()->setErrors(_('Anagrafica: Il tipo complesso è obbligatorio in '.__FILE__.' on line '.__LINE__));
 		}
 		
 		if($parent == 'CedentePrestatore'){
@@ -402,7 +393,6 @@ class DatiAnagrafici extends Tag {
 				&& $xmldata->AlboProfessionale instanceof SimpleXMLElement
 				&& (string) $xmldata->AlboProfessionale != ''
 			){
-				
 				$this->__set('AlboProfessionale', (string) $xmldata->AlboProfessionale);
 			}
 	
@@ -411,7 +401,6 @@ class DatiAnagrafici extends Tag {
 				&& $xmldata->ProvinciaAlbo instanceof SimpleXMLElement
 				&& (string) $xmldata->ProvinciaAlbo != ''
 			){
-				
 				$this->__set('ProvinciaAlbo', (string) $xmldata->ProvinciaAlbo);
 			}
 	
@@ -420,7 +409,6 @@ class DatiAnagrafici extends Tag {
 				&& $xmldata->NumeroIscrizioneAlbo instanceof SimpleXMLElement
 				&& (string) $xmldata->NumeroIscrizioneAlbo != ''
 			){
-				
 				$this->__set('NumeroIscrizioneAlbo', (string) $xmldata->NumeroIscrizioneAlbo);
 			}
 	
@@ -429,7 +417,6 @@ class DatiAnagrafici extends Tag {
 				&& $xmldata->DataIscrizioneAlbo instanceof SimpleXMLElement
 				&& (string) $xmldata->DataIscrizioneAlbo != ''
 			){
-				
 				$this->__set('DataIscrizioneAlbo', (string) $xmldata->DataIscrizioneAlbo);
 			}
 	
@@ -438,11 +425,10 @@ class DatiAnagrafici extends Tag {
 				&& $xmldata->RegimeFiscale instanceof SimpleXMLElement
 				&& (string) $xmldata->RegimeFiscale != ''
 			){
-				
 				$this->__set('RegimeFiscale', (string) $xmldata->RegimeFiscale);
 			} else{
 				
-				$this->err()->setErrors(_('Regime Fiscale: Il tipo è obbligatorio in '.$classname));
+				$this->err()->setErrors(_('Regime Fiscale: Il tipo è obbligatorio in '.__FILE__.' on line '.__LINE__));
 			}
 		}
 				

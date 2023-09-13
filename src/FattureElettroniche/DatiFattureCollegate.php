@@ -2,7 +2,7 @@
 /***
  * F5 - Fatture elettroniche
  * 
- * Copyright © 2022
+ * Copyright © 2023
  * Reload - Laboratorio Multimediale
  * (https://www.reloadlab.it - info@reloadlab.it)
  * 
@@ -11,7 +11,9 @@
 
 namespace F5\FattureElettroniche;
 use \ArrayAccess;
+use \Iterator;
+use \Countable;
 
-class DatiFattureCollegate extends DatiOrdineAcquisto implements ArrayAccess {
+class DatiFattureCollegate extends DatiOrdineAcquisto implements ArrayAccess, Iterator, Countable {
 
 }
